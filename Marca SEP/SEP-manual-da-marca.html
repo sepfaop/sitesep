@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Símbolo e assinaturas — SEP · FAOP</title>
+<style>
+  :root{--verde:#0E7A34;--verde-e:#0B4D24;--azul:#0A5AA0;--azul-e:#06407A;--ouro:#F2C200;
+    --verde-tint:#EAF6EC;--azul-tint:#E4EEF7;--ouro-tint:#FBF1C7;--verm:#C62828;
+    --texto:#232323;--cinza:#6b6b6b;--linha:#e3e3e3}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--texto);
+    background:#f4f5f4;line-height:1.55;padding:24px}
+  .page{max-width:1100px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 6px 26px rgba(0,0,0,.10)}
+  header.top{background:linear-gradient(120deg,var(--verde-e) 0%,var(--verde) 60%,var(--azul) 100%);
+    color:#fff;padding:30px 36px;position:relative}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+    background:linear-gradient(90deg,var(--verde) 0%,var(--verde) 34%,var(--ouro) 34%,var(--ouro) 67%,var(--azul) 67%,var(--azul) 100%)}
+  header h1{font-size:24px} header .sub{font-size:14px;opacity:.94;margin-top:5px}
+  h2{font-size:16px;color:var(--verde-e);margin:30px 36px 10px;padding-bottom:6px;
+    border-bottom:2px solid var(--verde-tint);display:flex;align-items:center;gap:9px}
+  h2::before{content:"";width:12px;height:12px;background:var(--verde);border-radius:3px}
+  p{margin:0 36px 10px;font-size:13.6px}
+  .wrap{padding:4px 36px 12px}
+  table{width:100%;border-collapse:collapse;font-size:12.8px}
+  thead th{background:var(--verde-e);color:#fff;text-align:left;padding:9px 10px;font-size:11px;
+    text-transform:uppercase;letter-spacing:.4px}
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--linha);vertical-align:top}
+  tbody tr:nth-child(even){background:#fafbfa}
+  .grid{display:grid;gap:14px;padding:6px 36px 8px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  .cel{border:1px solid var(--linha);border-radius:10px;padding:16px;text-align:center;background:#fff}
+  .cel.dark{background:var(--verde-e);border-color:var(--verde-e)}
+  .cel img{max-width:100%;height:auto;display:block;margin:0 auto}
+  .cap{font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--cinza);
+    font-weight:700;margin-top:12px}
+  .cel.dark .cap{color:rgba(255,255,255,.75)}
+  .nome{font-size:11.5px;font-family:ui-monospace,Consolas,monospace;color:#8a8a8a;margin-top:4px;word-break:break-all}
+  .box{border:1px solid var(--linha);border-radius:10px;padding:14px 16px}
+  .sim{border-left:5px solid var(--verde);background:#f8fdf9}
+  .nao{border-left:5px solid var(--verm);background:#fefafa}
+  .box h4{font-size:12px;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
+  .sim h4{color:var(--verde-e)} .nao h4{color:#8E1C1C}
+  .box ul{margin-left:18px;font-size:12.7px} .box li{margin:4px 0}
+  .info{margin:10px 36px 0;background:var(--azul-tint);border-left:5px solid var(--azul);
+    border-radius:8px;padding:13px 17px;font-size:12.8px}
+  .info b{color:var(--azul)}
+  .notas{margin:10px 36px 0;background:var(--ouro-tint);border-left:5px solid var(--ouro);
+    border-radius:8px;padding:13px 17px;font-size:12.8px}
+  .notas b{color:#7a5f00}
+  .sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:6px 36px}
+  .sw>div{border:1px solid var(--linha);border-radius:10px;overflow:hidden}
+  .sw .c{height:56px} .sw .m{padding:8px 10px;font-size:11.5px}
+  .sw .m b{display:block;font-size:12.5px;color:var(--verde-e)}
+  .sw .m code{font-family:ui-monospace,Consolas,monospace;color:var(--cinza)}
+  .red{display:flex;align-items:flex-end;gap:26px;padding:8px 36px 4px;flex-wrap:wrap}
+  .red figure{text-align:center}
+  .red figcaption{font-size:10.5px;color:var(--cinza);font-weight:700;margin-top:8px}
+  footer{background:#fafbfa;border-top:1px solid var(--linha);padding:18px 36px;font-size:11.5px;color:var(--cinza)}
+  @media print{body{background:#fff;padding:0}.page{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <h1>Símbolo e assinaturas visuais — SEP</h1>
+  <div class="sub">Serviço-Escola de Psicologia · Faculdade do Oeste Potiguar — FAOP<br>
+  Complemento visual do Projeto de Marca · 2026.2 · minuta para aprovação</div>
+</header>
+
+<h2>O conceito</h2>
+<p>O símbolo funde o <b>Ψ (psi)</b> — símbolo universal e profissional da Psicologia — a <b>dois valores declarados
+da FAOP no PPC 2025: o Docente e o Estudante</b>. São os dois únicos valores institucionais que nomeiam pessoas, e são
+exatamente as duas figuras que sustentam um serviço-escola.</p>
+
+<div class="grid g2">
+  <div class="box sim">
+    <h4>Como o símbolo é lido</h4>
+    <ul>
+      <li><b>O anel verde aberto</b> — a supervisão docente e o abrigo institucional da FAOP. Envolve sem fechar:
+      abriga, mas não aprisiona. O verde é a cor-mãe da instituição.</li>
+      <li><b>O arco azul interno</b> — o estagiário que escuta. Azul é a cor-âncora do SEP.</li>
+      <li><b>A haste central</b> — a pessoa atendida, no centro de tudo, atravessando as duas camadas de cuidado.</li>
+      <li><b>O ponto dourado</b> — ocupa exatamente a abertura do anel. É a singularidade de cada pessoa e o dourado
+      do sol nascente do brasão da FAOP. A abertura no topo diz que o serviço tem porta de entrada.</li>
+    </ul>
+  </div>
+  <div class="box sim">
+    <h4>Por que funciona</h4>
+    <ul>
+      <li>É <b>inequivocamente um Ψ</b> — não exige explicação para quem é da área.</li>
+      <li>É também <b>uma figura humana acolhida por dois arcos</b> — não exige explicação para quem não é.</li>
+      <li>Traduz visualmente a frase da plataforma de marca: <b>“Aqui, ninguém escuta sozinho.”</b></li>
+      <li>Usa apenas as cores do brasão da FAOP. Não inventa nada fora do sistema institucional.</li>
+      <li>Geometria pura: arcos e uma reta. Reproduz em bordado, adesivo recortado, carimbo e cópia P&amp;B.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="info">
+  <b>Coerência com o Projeto de Marca.</b> O documento principal veda cruz, caduceu, estetoscópio, cérebro, lâmpada e
+  peça de quebra-cabeça. O <b>Ψ não está entre os vetados</b> — é o símbolo próprio da profissão, e não um empréstimo
+  da Medicina nem um clichê de campanha. O uso aqui é deliberado e consistente com aquela regra.
+</div>
+
+<h2>Assinatura principal</h2>
+<div class="grid g3">
+  <div class="cel" style="grid-column:1/-1">
+    <img src="SEP-assinatura-horizontal.svg" alt="Assinatura horizontal" style="max-width:620px">
+    <div class="cap">Horizontal — uso preferencial</div>
+    <div class="nome">SEP-assinatura-horizontal.svg / .png</div>
+  </div>
+</div>
+<p>É a versão padrão. Deve ser usada sempre que houver largura disponível: cabeçalho de documento, ofício, placa,
+folder, apresentação, rodapé de e-mail.</p>
+
+<h2>Versões</h2>
+<div class="grid g3">
+  <div class="cel">
+    <img src="SEP-assinatura-vertical.svg" alt="Assinatura vertical" style="max-width:260px">
+    <div class="cap">Vertical / centralizada</div>
+    <div class="nome">SEP-assinatura-vertical</div>
+  </div>
+  <div class="cel">
+    <img src="SEP-assinatura-reduzida.svg" alt="Assinatura reduzida" style="max-width:260px">
+    <div class="cap">Reduzida — crachá, carimbo, selo</div>
+    <div class="nome">SEP-assinatura-reduzida</div>
+  </div>
+  <div class="cel dark">
+    <img src="SEP-assinatura-negativa.svg" alt="Assinatura negativa" style="max-width:260px">
+    <div class="cap">Negativa — fundo escuro</div>
+    <div class="nome">SEP-assinatura-negativa</div>
+  </div>
+  <div class="cel">
+    <img src="SEP-assinatura-monocromatica.svg" alt="Assinatura monocromática" style="max-width:260px">
+    <div class="cap">Monocromática — P&amp;B, carimbo</div>
+    <div class="nome">SEP-assinatura-monocromatica</div>
+  </div>
+  <div class="cel">
+    <img src="SEP-simbolo-cor.svg" alt="Símbolo isolado" style="max-width:130px">
+    <div class="cap">Símbolo isolado</div>
+    <div class="nome">SEP-simbolo-cor</div>
+  </div>
+  <div class="cel dark">
+    <img src="SEP-simbolo-negativo-sem-fundo.svg" alt="Símbolo negativo" style="max-width:130px">
+    <div class="cap">Símbolo negativo</div>
+    <div class="nome">SEP-simbolo-negativo-sem-fundo</div>
+  </div>
+</div>
+<div class="notas"><b>Quando usar o símbolo isolado.</b> Apenas em suportes onde a assinatura completa já apareceu ou
+onde o contexto institucional é evidente: favicon, avatar, carimbo, marca d'água, adesivo de porta, verso de crachá.
+<b>Em peça de captação, nunca use o símbolo sozinho</b> — o endosso FAOP tem de estar visível.</div>
+
+<h2>Cores</h2>
+<div class="sw">
+  <div><div class="c" style="background:#0E7A34"></div><div class="m"><b>Verde FAOP</b><code>#0E7A34</code> anel — supervisão</div></div>
+  <div><div class="c" style="background:#0A5AA0"></div><div class="m"><b>Azul SEP</b><code>#0A5AA0</code> arco — estagiário</div></div>
+  <div><div class="c" style="background:#06407A"></div><div class="m"><b>Azul escuro</b><code>#06407A</code> haste e nome</div></div>
+  <div><div class="c" style="background:#F2C200"></div><div class="m"><b>Dourado FAOP</b><code>#F2C200</code> ponto</div></div>
+  <div><div class="c" style="background:#0B4D24"></div><div class="m"><b>Verde escuro</b><code>#0B4D24</code> endosso e fundo negativo</div></div>
+  <div><div class="c" style="background:#232323"></div><div class="m"><b>Grafite</b><code>#232323</code> versão monocromática</div></div>
+</div>
+
+<h2>Construção e reduções</h2>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:28%">Parâmetro</th><th style="width:34%">Valor</th><th style="width:38%">Observação</th></tr></thead>
+  <tbody>
+    <tr><td>Grade do símbolo</td><td>120 × 120 unidades</td><td>Anel: centro (60,62), raio 42, abertura de 84° no topo</td></tr>
+    <tr><td>Espessura de traço</td><td>9 unidades, ponta arredondada</td><td>Constante em todos os elementos — não alterar</td></tr>
+    <tr><td>Ponto dourado</td><td>raio 7,5 · centro (60,28)</td><td>Ocupa a abertura do anel; nunca deslocar</td></tr>
+    <tr><td>Área de proteção</td><td>= diâmetro do ponto dourado (15 un.)</td><td>Margem livre em todos os lados da assinatura</td></tr>
+    <tr><td>Tamanho mínimo — assinatura</td><td>35 mm de largura (impresso) · 150 px (tela)</td><td>Abaixo disso, usar a versão reduzida</td></tr>
+    <tr><td>Tamanho mínimo — símbolo</td><td>10 mm (impresso) · 32 px (tela)</td><td>Abaixo de 10 mm o ponto dourado perde definição</td></tr>
+    <tr><td>Tipografia</td><td>Segoe UI Bold · alternativas: Calibri, Carlito, Arial</td><td>Sem fonte comprada — reproduzível no Word e no Canva</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="red">
+  <figure><img src="SEP-simbolo-cor.svg" width="96" alt="Símbolo a 25 mm"><figcaption>25 mm</figcaption></figure>
+  <figure><img src="SEP-simbolo-cor.svg" width="57" alt="Símbolo a 15 mm"><figcaption>15 mm</figcaption></figure>
+  <figure><img src="SEP-simbolo-cor.svg" width="38" alt="Símbolo a 10 mm"><figcaption>10 mm — mínimo</figcaption></figure>
+  <figure><img src="SEP-simbolo-cor.svg" width="23" alt="Símbolo a 6 mm"><figcaption style="color:#8E1C1C">6 mm — não usar</figcaption></figure>
+</div>
+
+<h2>Usos incorretos</h2>
+<div class="grid g2">
+  <div class="box nao">
+    <h4>Nunca</h4>
+    <ul>
+      <li>Fechar o anel verde — a abertura é o conceito, não um defeito de desenho</li>
+      <li>Remover ou recolorir o ponto dourado</li>
+      <li>Trocar as cores entre anel, arco e haste</li>
+      <li>Distorcer, inclinar, aplicar sombra, contorno ou gradiente</li>
+      <li>Alterar a espessura relativa dos traços</li>
+    </ul>
+  </div>
+  <div class="box nao">
+    <h4>Também nunca</h4>
+    <ul>
+      <li>Usar a assinatura sem o endosso “Faculdade do Oeste Potiguar — FAOP”</li>
+      <li>Aplicar sobre fotografia sem tarja sólida</li>
+      <li>Recriar o texto em fonte serifada, condensada ou script</li>
+      <li>Acrescentar cruz, caduceu, cérebro, laço de campanha ou qualquer elemento ao símbolo</li>
+      <li>Usar o símbolo isolado em peça de captação de usuários</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Conceitos alternativos avaliados</h2>
+<p>Registrados para o colegiado, caso se prefira outro caminho. Ambos partem do mesmo Ψ.</p>
+<div class="grid g3">
+  <div class="cel">
+    <img src="SEP-conceito-alternativo-A-aurora.svg" alt="Conceito A — Aurora" style="max-width:150px">
+    <div class="cap">A · Aurora</div>
+    <div style="font-size:12.3px;color:#555;margin-top:8px;text-align:left">Ψ sobre a linha do horizonte, dentro do
+    sol nascente do brasão. Liga-se ao <b>desenvolvimento regional</b> e ao valor <b>Criatividade e Inovação</b>.
+    Mais literal em relação ao brasão, porém tem mais elementos e leitura mais frágil em tamanhos pequenos.</div>
+  </div>
+  <div class="cel">
+    <img src="SEP-conceito-alternativo-B-broto.svg" alt="Conceito B — Broto" style="max-width:150px">
+    <div class="cap">B · Broto</div>
+    <div style="font-size:12.3px;color:#555;margin-top:8px;text-align:left">Ψ cujas hastes brotam em folhas, evocando
+    o algodão e o milho do brasão. Liga-se ao valor <b>Estudante</b> e à formação. É o mais simples, mas o menos
+    distintivo — aproxima-se de marcas de bem-estar e fitoterapia.</div>
+  </div>
+  <div class="cel" style="border-color:var(--verde);border-width:2px">
+    <img src="SEP-simbolo-cor.svg" alt="Conceito recomendado" style="max-width:150px">
+    <div class="cap" style="color:var(--verde-e)">★ Recomendado · Escuta compartilhada</div>
+    <div style="font-size:12.3px;color:#555;margin-top:8px;text-align:left">Único que traduz a tese central do
+    projeto de marca — a supervisão como argumento, não como ressalva — e o único que se mantém legível a 10 mm e em
+    monocromia.</div>
+  </div>
+</div>
+
+<h2>Arquivos entregues</h2>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:44%">Arquivo</th><th style="width:20%">Formato</th><th style="width:36%">Uso</th></tr></thead>
+  <tbody>
+    <tr><td>SEP-assinatura-horizontal</td><td>SVG + PNG</td><td>Padrão: documento, placa, folder, slide</td></tr>
+    <tr><td>SEP-assinatura-vertical</td><td>SVG + PNG</td><td>Espaços estreitos, cartaz, banner, avatar</td></tr>
+    <tr><td>SEP-assinatura-reduzida</td><td>SVG + PNG</td><td>Crachá, carimbo, rodapé, selo</td></tr>
+    <tr><td>SEP-assinatura-negativa</td><td>SVG + PNG</td><td>Fundo verde escuro ou fotografia com tarja</td></tr>
+    <tr><td>SEP-assinatura-monocromatica</td><td>SVG + PNG</td><td>Cópia P&amp;B, carimbo, gravação</td></tr>
+    <tr><td>SEP-simbolo-cor · -monocromatico · -negativo · -negativo-sem-fundo</td><td>SVG + PNG</td><td>Símbolo isolado</td></tr>
+    <tr><td>SEP-conceito-alternativo-A-aurora · -B-broto</td><td>SVG + PNG</td><td>Registro das alternativas</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="notas"><b>SVG é o arquivo-fonte.</b> Use sempre o SVG quando o programa aceitar (Word, PowerPoint, Canva,
+Illustrator, Inkscape, gráfica) — ele não perde qualidade em nenhuma ampliação. O PNG tem fundo transparente e serve
+para uso rápido em tela. Nas peças impressas, exija do fornecedor a saída a partir do SVG.</div>
+
+<footer>
+  <b>Símbolo e assinaturas visuais do Serviço-Escola de Psicologia da FAOP.</b> Proposta elaborada por
+  Prof. Pedro Atuan de Medeiros Albino, Responsável Técnico do SEP, agosto de 2026.<br>
+  Conceito derivado dos valores institucionais declarados no PPC 2025 (item 1.4 — Ensino de Excelência, Ética,
+  Docente, Estudante, Criatividade e Inovação) e das cores do brasão da FAOP.<br><br>
+  Minuta sujeita à aprovação do colegiado e do setor de comunicação da FAOP.
+</footer>
+
+</div>
+</body>
+</html>

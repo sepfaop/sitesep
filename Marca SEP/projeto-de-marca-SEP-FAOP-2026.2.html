@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto de Marca — Serviço-Escola de Psicologia · FAOP · 2026.2</title>
+<style>
+  :root{
+    --logo-verde-escuro:#004218; --logo-verde:#00AB35; --logo-azul:#05589C;
+    --logo-azul-claro:#48A2EB; --logo-amarelo:#FED404;
+    --verde-escuro:#0B4D24; --verde:#00A030; --verde-linha:#0E7A34;
+    --dourado:#F2C200; --dourado-esc:#C79A00; --azul:#0A5AA0;
+    --verde-tint:#EAF6EC; --dourado-tint:#FBF1C7; --azul-tint:#E4EEF7;
+    --vermelho:#C62828; --vermelho-tint:#FCE9E9; --vermelho-esc:#8E1C1C;
+    --roxo:#5B3E8E; --roxo-tint:#EFEAF7;
+    --texto:#232323; --cinza:#6b6b6b; --linha:#e3e3e3;
+    --sep:#0A5AA0; --sep-esc:#06407A; --sep-tint:#E4EEF7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--texto);
+    background:#f4f5f4;line-height:1.55;padding:24px}
+  .page{max-width:1180px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 6px 26px rgba(0,0,0,.10)}
+  header.top{background:linear-gradient(120deg,var(--verde-escuro) 0%,var(--verde-linha) 55%,var(--sep) 100%);
+    color:#fff;padding:32px 38px;position:relative}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+    background:linear-gradient(90deg,var(--verde) 0%,var(--verde) 34%,var(--dourado) 34%,var(--dourado) 67%,var(--sep) 67%,var(--sep) 100%)}
+  .head-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .logo-box{background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .logo-box img{height:76px;display:block}
+  .head-txt h1{font-size:27px;font-weight:700;letter-spacing:.2px}
+  .head-txt .sub{font-size:14.5px;opacity:.94;margin-top:5px;max-width:640px}
+  .badge{display:inline-block;background:var(--dourado);color:#3a2d00;font-weight:700;
+    font-size:12px;padding:3px 11px;border-radius:20px;margin-top:10px;margin-right:6px}
+  .badge.b2{background:rgba(255,255,255,.22);color:#fff}
+  nav.toc{background:#fbfcfb;border-bottom:1px solid var(--linha);padding:12px 38px;
+    display:flex;flex-wrap:wrap;gap:7px;position:sticky;top:0;z-index:20}
+  nav.toc a{font-size:11.5px;font-weight:700;text-decoration:none;color:var(--verde-escuro);
+    background:var(--verde-tint);padding:5px 11px;border-radius:20px;transition:.12s}
+  nav.toc a:hover{background:var(--verde);color:#fff}
+  nav.toc a.p{background:var(--sep-tint);color:var(--sep)}
+  nav.toc a.p:hover{background:var(--sep);color:#fff}
+  h2.sec{font-size:17px;color:var(--verde-escuro);margin:34px 38px 12px;padding-bottom:7px;
+    border-bottom:2px solid var(--verde-tint);display:flex;align-items:center;gap:9px;scroll-margin-top:64px}
+  h2.sec::before{content:"";width:12px;height:12px;background:var(--verde);border-radius:3px;flex:none}
+  h2.sec .n{font-size:11px;background:var(--verde-escuro);color:#fff;padding:2px 8px;border-radius:10px;
+    font-weight:700;letter-spacing:.5px}
+  h3.sub{font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--cinza);
+    font-weight:700;margin:22px 38px 8px}
+  p{margin:0 38px 10px;font-size:13.8px}
+  p.lead{font-size:14.5px;color:#3d3d3d}
+  ul.body,ol.body{margin:0 38px 12px 60px;font-size:13.8px}
+  ul.body li,ol.body li{margin:5px 0}
+  .wrap{padding:4px 38px 12px}
+  table{width:100%;border-collapse:collapse;font-size:12.8px}
+  thead th{background:var(--verde-escuro);color:#fff;text-align:left;padding:9px 10px;font-size:11px;
+    text-transform:uppercase;letter-spacing:.4px}
+  thead th:first-child{border-top-left-radius:8px} thead th:last-child{border-top-right-radius:8px}
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--linha);vertical-align:top}
+  tbody tr:nth-child(even){background:#fafbfa}
+  table.sep thead th{background:var(--sep-esc)}
+  code.hx{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+  .notas{margin:10px 38px 0;background:var(--dourado-tint);border-left:5px solid var(--dourado);
+    border-radius:8px;padding:13px 17px;font-size:12.8px}
+  .notas b{color:#7a5f00}
+  .alerta{margin:10px 38px 0;background:var(--vermelho-tint);border-left:5px solid var(--vermelho);
+    border-radius:8px;padding:13px 17px;font-size:12.8px}
+  .alerta b{color:var(--vermelho-esc)}
+  .info{margin:10px 38px 0;background:var(--azul-tint);border-left:5px solid var(--sep);
+    border-radius:8px;padding:13px 17px;font-size:12.8px}
+  .info b{color:var(--sep)}
+  .ok{margin:10px 38px 0;background:var(--verde-tint);border-left:5px solid var(--verde);
+    border-radius:8px;padding:13px 17px;font-size:12.8px}
+  .ok b{color:var(--verde-escuro)}
+  .notas ul,.alerta ul,.info ul,.ok ul{margin:7px 0 0 19px}
+  .notas li,.alerta li,.info li,.ok li{margin:3px 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px;padding:6px 38px 6px}
+  .card{border:1px solid var(--linha);border-radius:10px;padding:13px 15px;border-top:4px solid var(--verde);background:#fff}
+  .card.c2{border-top-color:var(--dourado)} .card.c3{border-top-color:var(--sep)}
+  .card.c4{border-top-color:var(--verde-escuro)} .card.c5{border-top-color:var(--roxo)}
+  .card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--cinza);font-weight:700}
+  .card .v{font-size:14.5px;font-weight:700;margin-top:4px;color:var(--verde-escuro);line-height:1.35}
+  .card .d{font-size:12.5px;color:#444;margin-top:6px;line-height:1.45}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:6px 38px 6px}
+  .sw{border:1px solid var(--linha);border-radius:10px;overflow:hidden;background:#fff}
+  .sw .chip-color{height:64px}
+  .sw .meta{padding:9px 11px}
+  .sw .nm{font-size:12.5px;font-weight:700;color:var(--verde-escuro)}
+  .sw .hx{font-size:11.5px;font-family:ui-monospace,Consolas,monospace;color:var(--cinza);margin-top:2px}
+  .sw .role{font-size:11px;color:#555;margin-top:5px;line-height:1.4}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:6px 38px 6px}
+  @media(max-width:880px){.duo{grid-template-columns:1fr}}
+  .box{border:1px solid var(--linha);border-radius:10px;padding:13px 16px}
+  .box.sim{border-left:5px solid var(--verde);background:#f8fdf9}
+  .box.nao{border-left:5px solid var(--vermelho);background:#fefafa}
+  .box h4{font-size:12px;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
+  .box.sim h4{color:var(--verde-escuro)} .box.nao h4{color:var(--vermelho-esc)}
+  .box ul{margin-left:18px;font-size:12.7px} .box li{margin:4px 0}
+  .assinatura{padding:10px 38px 6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .amostra{border:1px solid var(--linha);border-radius:10px;padding:18px;display:flex;
+    flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:150px}
+  .amostra.dark{background:var(--verde-escuro)}
+  .amostra .cap{font-size:10.5px;color:var(--cinza);text-transform:uppercase;letter-spacing:.7px;font-weight:700}
+  .amostra.dark .cap{color:rgba(255,255,255,.75)}
+  .tg{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:12px}
+  .t-p0{background:var(--roxo);color:#fff} .t-p1{background:var(--sep);color:#fff}
+  .t-p2{background:var(--verde);color:#fff} .t-crit{background:var(--vermelho);color:#fff}
+  .t-ok{background:var(--verde-tint);color:var(--verde-escuro)}
+  .t-doc{background:var(--dourado);color:#3a2d00}
+  .tl{position:relative;padding:0 0 16px 24px;border-left:3px solid var(--sep-tint);margin:0 38px 0 46px}
+  .tl:last-child{border-left-color:transparent}
+  .tl::before{content:"";position:absolute;left:-9px;top:2px;width:15px;height:15px;border-radius:50%;
+    background:#fff;border:3px solid var(--sep)}
+  .tl.g::before{border-color:var(--verde)} .tl.d::before{border-color:var(--dourado)}
+  .tl .dt{font-size:11.5px;font-weight:700;color:var(--sep);text-transform:uppercase;letter-spacing:.5px}
+  .tl.g .dt{color:var(--verde-escuro)} .tl.d .dt{color:var(--dourado-esc)}
+  .tl .ti{font-size:13.8px;font-weight:600;margin-top:2px}
+  .tl .tx{font-size:12.7px;color:#4a4a4a;margin-top:3px}
+  .check{margin:6px 38px 10px 56px;font-size:13px}
+  .check li{list-style:none;margin:6px 0;padding-left:26px;position:relative}
+  .check li::before{content:"\2610";position:absolute;left:0;font-size:15px;color:var(--sep)}
+  footer.pg{background:#fafbfa;border-top:1px solid var(--linha);padding:18px 38px;font-size:11.5px;color:var(--cinza)}
+  .pill{display:inline-block;background:var(--verde-tint);color:var(--verde-escuro);font-size:11px;
+    font-weight:700;padding:2px 9px;border-radius:12px;margin-right:5px}
+  @media print{body{background:#fff;padding:0} .page{box-shadow:none} nav.toc{display:none}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <div class="head-row">
+    <div class="logo-box"><img src="faop2.png" alt="Brasão FAOP"></div>
+    <div class="head-txt">
+      <h1>Projeto de Marca — Serviço-Escola de Psicologia</h1>
+      <div class="sub">Faculdade do Oeste Potiguar — FAOP · Curso de Bacharelado em Psicologia<br>
+      Plataforma de marca, identidade visual, manual de aplicação e plano de comunicação</div>
+      <span class="badge">Semestre 2026.2</span>
+      <span class="badge b2">Abertura oficial: 27/08/2026</span>
+      <span class="badge b2">Minuta para apreciação do colegiado</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#s0">Como ler</a>
+  <a href="#s1">1 · Diagnóstico</a>
+  <a href="#s2">2 · Arquitetura</a>
+  <a href="#s3">3 · Plataforma</a>
+  <a href="#s4">4 · Públicos</a>
+  <a href="#s5">5 · Tom de voz</a>
+  <a class="p" href="#s6">6 · Identidade visual</a>
+  <a class="p" href="#s7">7 · Aplicações</a>
+  <a class="p" href="#s8">8 · Canais</a>
+  <a href="#s9">9 · Tempo 1 (até 27/08)</a>
+  <a href="#s10">10 · Tempo 2 (semestre)</a>
+  <a href="#s11">11 · Riscos</a>
+  <a href="#s12">12 · Governança</a>
+  <a href="#s13">13 · Decisões pendentes</a>
+</nav>
+
+<h2 class="sec" id="s0"><span class="n">00</span> Como ler este documento</h2>
+<p class="lead">Este é um <b>projeto de marca de serviço público-formativo</b>, não uma peça publicitária. Ele parte de uma
+restrição real: o SEP abre com <b>4 salas</b>, capacidade estimada de <b>644 atendimentos no semestre</b> (divididos
+56/44 entre o SEP e o Centro de Reabilitação Municipal) e uma janela curta — <b>27/08 a 19/11/2026</b>. Marca, aqui,
+não serve para atrair o máximo de gente: serve para <b>atrair a gente certa, na ordem certa, com a expectativa certa</b>.</p>
+<p>Foi construído em <b>dois tempos</b>, conforme decidido: um <b>Kit Mínimo Viável</b> que precisa estar pronto até a
+abertura (seção 9) e um <b>roadmap de consolidação</b> para o restante de 2026.2 (seção 10). As seções 1 a 8 são a
+fundamentação que sustenta as duas.</p>
+<div class="notas">
+  <b>Convenções.</b>
+  <ul>
+    <li><span class="tg t-doc">[PREENCHER]</span> marca campos que dependem de decisão institucional — os mesmos campos já abertos na minuta da Carta de Serviços ao Usuário.</li>
+    <li><span class="tg t-crit">CRÍTICO</span> marca itens sem os quais a abertura em 27/08 não deve ocorrer.</li>
+    <li>Todas as regras de divulgação citadas têm fundamento no <b>Art. 20 do Código de Ética Profissional do Psicólogo</b> (Resolução CFP nº 010/2005), transcrito na seção 5.</li>
+  </ul>
+</div>
+
+<h2 class="sec" id="s1"><span class="n">01</span> Diagnóstico: a tensão que a marca precisa resolver</h2>
+<p class="lead">Todo serviço-escola de Psicologia enfrenta a mesma pergunta, dita ou não dita, na primeira conversa:
+<b>“quem vai me atender é estagiário?”</b>. A resposta que o serviço dá a essa pergunta <i>é</i> a sua marca.</p>
+
+<div class="duo">
+  <div class="box nao">
+    <h4>As duas saídas erradas</h4>
+    <ul>
+      <li><b>Esconder.</b> Comunicar como se fosse uma clínica comum, omitindo o caráter formativo. Além de antiético,
+      contraria o dever de informar o usuário e desmorona no primeiro atendimento.</li>
+      <li><b>Pedir desculpas.</b> “É só um estagiário, mas fique tranquilo.” Desvaloriza o trabalho, coloca o usuário
+      em posição de quem aceita algo inferior e enfraquece o estudante diante do próprio paciente.</li>
+    </ul>
+  </div>
+  <div class="box sim">
+    <h4>A saída deste projeto</h4>
+    <ul>
+      <li><b>Transformar a supervisão em argumento.</b> No SEP, nenhum caso é conduzido sozinho: há um psicólogo
+      responsável por trás de cada atendimento, discussão semanal em supervisão, registro em prontuário e leitura
+      coletiva do caso.</li>
+      <li>Esse é o <b>diferencial real</b> — e não a ressalva. Num consultório particular, o paciente é escutado por
+      uma pessoa. Aqui, o caso é pensado por uma equipe.</li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="sub">O que o SEP disputa — e com quem</h3>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:20%">Alternativa do usuário</th><th style="width:26%">Vantagem dela</th><th style="width:27%">Limite dela</th><th style="width:27%">Onde o SEP ganha</th></tr></thead>
+  <tbody>
+    <tr><td><b>Consultório particular</b></td><td>Escolha do profissional, horário flexível, sem fila</td><td>Custo — barreira decisiva para a maior parte da população local</td><td><b>Gratuidade</b> (ou custo social) com acompanhamento continuado</td></tr>
+    <tr><td><b>Rede pública (UBS, CAPS)</b></td><td>Porta de entrada consolidada, cobertura territorial</td><td>Alta demanda, atendimento frequentemente episódico ou espaçado</td><td><b>Continuidade</b> — sessões regulares, com o mesmo estagiário, ao longo do semestre</td></tr>
+    <tr><td><b>Não buscar ajuda</b></td><td>—</td><td>Estigma, desconhecimento, medo de julgamento</td><td><b>Baixo limiar de entrada</b>: acolhimento sem diagnóstico prévio, sem encaminhamento obrigatório</td></tr>
+    <tr><td><b>Outros serviços-escola / projetos</b></td><td>Podem existir na região</td><td>—</td><td>Não é disputa: é <b>rede</b>. A marca do SEP se posiciona como parceira, não concorrente</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="alerta">
+  <b>O risco que orienta todo o plano.</b> Com capacidade finita e janela de 12 semanas de atendimento, uma campanha
+  aberta de grande alcance na abertura produziria fila, espera longa e a percepção de “serviço que não funciona” —
+  dano de marca difícil de reverter e que recairia sobre a FAOP. Por isso a seção 4 hierarquiza os públicos e a seção 9
+  recomenda <b>anunciar vagas limitadas, não convite aberto</b>.
+</div>
+
+<h2 class="sec" id="s2"><span class="n">02</span> Arquitetura de marca e nomenclatura</h2>
+<p class="lead">O SEP é uma <b>submarca endossada</b> pela FAOP. Não é marca independente e não deve buscar autonomia
+visual: toda a legitimidade do serviço — supervisão qualificada, vínculo acadêmico, gratuidade, responsabilidade
+institucional — deriva de ser <i>da faculdade</i>. A assinatura conjunta é obrigatória em qualquer peça.</p>
+
+<div class="cards">
+  <div class="card"><div class="k">Marca-mãe</div><div class="v">FAOP</div>
+    <div class="d">Endossante. Aporta credibilidade regulatória e institucional. Presente em 100% das peças.</div></div>
+  <div class="card c3"><div class="k">Marca de serviço</div><div class="v">Serviço-Escola de Psicologia</div>
+    <div class="d">Submarca. Tem cor-âncora e voz próprias, dentro do sistema visual da FAOP.</div></div>
+  <div class="card c2"><div class="k">Sigla de uso</div><div class="v">SEP</div>
+    <div class="d">Uso interno e na rede profissional. Nunca em primeira menção ao público externo.</div></div>
+  <div class="card c4"><div class="k">Assinatura completa</div><div class="v">Serviço-Escola de Psicologia da FAOP</div>
+    <div class="d">Obrigatória em documentos, placas, ofícios e na primeira menção de qualquer peça.</div></div>
+</div>
+
+<h3 class="sub">Regras de nomenclatura</h3>
+<div class="duo">
+  <div class="box sim">
+    <h4>Usar</h4>
+    <ul>
+      <li><b>Serviço-Escola de Psicologia da FAOP</b> — forma extensa, sempre na primeira menção.</li>
+      <li><b>SEP</b> — a partir da segunda menção, e no tratamento com a rede e o público interno.</li>
+      <li><b>SEP FAOP</b> — forma curta em assinatura de e-mail, redes e crachá.</li>
+      <li>“Serviço-escola” com hífen e minúscula quando genérico; maiúsculas quando é o nome próprio deste serviço.</li>
+    </ul>
+  </div>
+  <div class="box nao">
+    <h4>Não usar</h4>
+    <ul>
+      <li><b>“Clínica-Escola”</b> — termo em desuso normativo; a Resolução CNE/CES nº 01/2023 e os documentos do
+      Sistema Conselhos consolidaram <i>serviço-escola</i>. Além disso, “clínica” restringe simbolicamente o serviço
+      ao modelo consultório, quando ele também faz plantão, grupo, triagem e ação comunitária.</li>
+      <li><b>“Clínica de Psicologia da FAOP”</b> — sugere serviço profissional pago.</li>
+      <li><b>Nome de batismo ou homenagem</b> — decidido manter a denominação institucional. Um nome próprio criaria
+      um ativo que exigiria explicação adicional a cada contato, sem ganho na fase de implantação.</li>
+      <li><b>Apelidos afetivos</b> (“a clínica”, “o serviço”) em material impresso ou digital — aceitáveis apenas na
+      conversa interna.</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="sec" id="s3"><span class="n">03</span> Plataforma de marca</h2>
+
+<h3 class="sub">Propósito — por que existimos</h3>
+<div class="ok">
+  <b>Formar psicólogos formando vínculo.</b> Cada atendimento no SEP é, ao mesmo tempo, cuidado para quem chega e
+  aprendizado para quem atende — e nenhum dos dois pode ser sacrificado pelo outro. É essa recusa em escolher que
+  define o serviço.
+</div>
+
+<h3 class="sub">Posicionamento — a frase que orienta toda decisão</h3>
+<div class="info">
+  Para <b>pessoas de [PREENCHER: município] que precisam de acompanhamento psicológico e não têm como pagar por ele</b>,
+  o <b>Serviço-Escola de Psicologia da FAOP</b> é o serviço psicológico de base universitária que oferece
+  <b>acompanhamento continuado, gratuito e supervisionado</b> — diferente do consultório particular, que cobra, e do
+  atendimento episódico da rede, que raramente sustenta um processo — <b>porque a formação de um psicólogo exige
+  continuidade, e continuidade é exatamente o que falta na oferta local</b>.
+</div>
+<p style="margin-top:10px"><b>Como usar:</b> essa frase não vai em peça nenhuma. Ela é o critério de decisão. Toda vez
+que houver dúvida sobre o que comunicar, pergunte se a peça reforça <i>gratuito</i>, <i>continuado</i> e
+<i>supervisionado</i>. Se não reforça nenhum dos três, provavelmente não deve ser publicada.</p>
+
+<h3 class="sub">Conceito e assinatura verbal — três opções</h3>
+<div class="wrap">
+<table class="sep">
+  <thead><tr><th style="width:26%">Conceito</th><th style="width:36%">O que ativa</th><th style="width:24%">Onde funciona melhor</th><th style="width:14%">Recomendação</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>“Aqui, ninguém escuta sozinho.”</b></td>
+      <td>Converte a supervisão de ressalva em promessa. Fala ao usuário (você não está entregue a um iniciante) e ao
+      estagiário (você não está sozinho na sala) com a mesma frase. Resolve diretamente a tensão da seção 1.</td>
+      <td>Comunicação externa, cartaz, abertura, redes</td>
+      <td><span class="tg t-ok">Recomendado</span> para campanha</td>
+    </tr>
+    <tr>
+      <td><b>“Cuidar e formar, no mesmo gesto.”</b></td>
+      <td>Nomeia a dupla natureza do serviço com sobriedade institucional. Boa para o colegiado, para a rede e para
+      documentos oficiais.</td>
+      <td>Documentos, ofícios, deck institucional</td>
+      <td><span class="tg t-ok">Recomendado</span> para uso institucional</td>
+    </tr>
+    <tr>
+      <td>“Escuta que se aprende.”</td>
+      <td>Elegante, mas ambígua para quem não é da área — pode ser lida como curso, e não como atendimento.</td>
+      <td>Uso interno, materiais dos estagiários</td>
+      <td>Reserva</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="notas"><b>Nota de uso.</b> Assinatura verbal não é slogan de propaganda e não deve ser aplicada junto à
+marca em toda peça. Use como <i>abertura de texto</i> — primeira linha do cartaz, primeira frase do folder, título do
+release — e não como selo repetido.</div>
+
+<h3 class="sub">Valores de marca — e o que cada um obriga na prática</h3>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:20%">Valor</th><th style="width:38%">O que significa</th><th style="width:42%">O que obriga (teste de coerência)</th></tr></thead>
+  <tbody>
+    <tr><td><b>Transparência formativa</b></td>
+      <td>O caráter de estágio é dito na primeira frase, não na letra miúda.</td>
+      <td>Toda peça de captação informa que o atendimento é realizado por estagiário sob supervisão. Se alguma peça
+      omite, ela não sai.</td></tr>
+    <tr><td><b>Continuidade</b></td>
+      <td>Assumimos o processo, não a sessão avulsa.</td>
+      <td>Exige protocolo de encerramento e transição no fim do semestre (último atendimento em 19/11) — sem isso,
+      “continuidade” vira promessa quebrada. Ver risco R2.</td></tr>
+    <tr><td><b>Sigilo</b></td>
+      <td>Protegido e <i>explicado</i>, não apenas prometido.</td>
+      <td>O usuário é informado dos limites legais e éticos do sigilo no acolhimento, não só no TCLE assinado.
+      Nenhuma imagem, relato ou identificação circula em redes — inclusive nas pessoais dos estagiários.</td></tr>
+    <tr><td><b>Vínculo com a rede</b></td>
+      <td>Não somos ilha: recebemos e devolvemos.</td>
+      <td>Todo encaminhamento recebido gera contrarreferência ao serviço de origem. É o que sustenta o fluxo em 2027.1.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 class="sub">Personalidade</h3>
+<div class="cards">
+  <div class="card"><div class="k">Arquétipo dominante</div><div class="v">Cuidador</div>
+    <div class="d">Disponível, paciente, não julga, não apressa. Fala em primeira pessoa do plural.</div></div>
+  <div class="card c2"><div class="k">Arquétipo de apoio</div><div class="v">Mentor</div>
+    <div class="d">Explica o processo, ensina o caminho, devolve autonomia. Nunca condescendente.</div></div>
+  <div class="card c3"><div class="k">O que não somos</div><div class="v">Herói</div>
+    <div class="d">Não salvamos ninguém, não prometemos transformação e não usamos linguagem de superação.</div></div>
+  <div class="card c5"><div class="k">O que não somos</div><div class="v">Sábio distante</div>
+    <div class="d">Nada de jargão teórico, citação de autor ou sofisticação que afaste quem mais precisa entrar.</div></div>
+</div>
+
+<h2 class="sec" id="s4"><span class="n">04</span> Públicos: três, com hierarquia e ordem de ataque</h2>
+<p class="lead">Os três públicos importam. Mas eles <b>não entram ao mesmo tempo</b> — e essa é a decisão estratégica
+mais importante deste projeto. A ordem abaixo é ao mesmo tempo cronológica e de prioridade.</p>
+
+<div class="wrap">
+<table class="sep">
+  <thead><tr><th style="width:6%">Ord.</th><th style="width:18%">Público</th><th style="width:14%">Janela</th><th style="width:32%">Por que nesta posição</th><th style="width:30%">O que a marca precisa provar a ele</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="tg t-p0">P0</span></td>
+      <td><b>Comunidade interna FAOP</b><br><small>estagiários, docentes, secretaria, portaria, coordenação</small></td>
+      <td>Até <b>17/08</b><br><small>(início da operação interna)</small></td>
+      <td><b>Pré-condição, não etapa.</b> A portaria e a secretaria são o primeiro ponto de contato real do serviço.
+      Se elas não souberem responder “o que é, para quem é, como agendar”, a marca falha antes de existir. Os
+      estagiários, por sua vez, são os principais divulgadores espontâneos — e os principais riscos de comunicação.</td>
+      <td>Que o SEP é um espaço de formação sério e do qual vale a pena fazer parte — e que existem regras claras
+      sobre o que se pode e não se pode dizer fora dele.</td>
+    </tr>
+    <tr>
+      <td><span class="tg t-p1">P1</span></td>
+      <td><b>Rede encaminhadora</b><br><small>UBS/eSF, CAPS, CRAS/CREAS, escolas, Conselho Tutelar, Centro de Reabilitação Municipal</small></td>
+      <td><b>17–27/08</b><br><small>(antes da abertura ao público)</small></td>
+      <td><b>Prioridade estratégica.</b> Demanda vinda da rede chega triada, com melhor aderência e menor absenteísmo;
+      permite calibrar o volume de entrada em vez de sofrê-lo. O Centro de Reabilitação Municipal já é parceiro
+      operacional — é o ponto de partida natural. E é a rede que sustenta o fluxo em 2027.1, quando a novidade passar.</td>
+      <td>Competência técnica e previsibilidade: quem supervisiona, o que atendemos, o que <b>não</b> atendemos,
+      qual o prazo de resposta e como a contrarreferência volta.</td>
+    </tr>
+    <tr>
+      <td><span class="tg t-p2">P2</span></td>
+      <td><b>Comunidade externa</b><br><small>população geral de [PREENCHER: município] e entorno</small></td>
+      <td>A partir de <b>27/08</b></td>
+      <td><b>Prioridade de volume, deliberadamente por último.</b> Campanha aberta antes de a capacidade ser testada
+      produz fila e frustração (ver risco R1). Entra quando o fluxo interno já foi validado com a demanda da rede.</td>
+      <td>Que existe, que é gratuito, que é seguro, que não julga — e <b>quanto tempo leva</b> para ser atendido.
+      Gestão de expectativa é parte da mensagem, não uma ressalva.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 class="sub">Matriz de mensagens</h3>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:14%">Público</th><th style="width:30%">Mensagem central</th><th style="width:28%">Prova que a sustenta</th><th style="width:28%">O que nunca dizer</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tg t-p0">P0 Interno</span></td>
+      <td>“Você faz parte de um serviço que atende de verdade — e por isso responde por ele.”</td>
+      <td>Regimento interno, escala de supervisão, prontuário, RT presente em todos os horários de abertura.</td>
+      <td>Que é “só um estágio”. Que dá para postar bastidor. Que o sigilo tem exceção informal.</td></tr>
+    <tr><td><span class="tg t-p1">P1 Rede</span></td>
+      <td>“Encaminhe para cá o que precisa de acompanhamento continuado — e receba retorno do caso.”</td>
+      <td>Critérios de encaminhamento por escrito, fluxo de atendimento formalizado, contrarreferência, CRP do RT.</td>
+      <td>Que atendemos tudo. Que absorvemos urgência e crise. Que temos vaga imediata.</td></tr>
+    <tr><td><span class="tg t-p2">P2 Comunidade</span></td>
+      <td>“Atendimento psicológico gratuito, com hora marcada, feito por estudantes de Psicologia sob supervisão de psicólogos.”</td>
+      <td>Gratuidade, endereço, horário, nome do RT, vínculo com a FAOP.</td>
+      <td>Promessa de resultado, prazo de melhora, comparação com outros serviços, dramatização do sofrimento.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="info">
+  <b>O que o SEP não atende — dizer isso é parte da marca.</b> Definir e publicar explicitamente os critérios de
+  <i>não</i> atendimento (urgência psiquiátrica, risco iminente, demanda pericial ou judicial, laudo para fim
+  específico, dependência química em fase aguda — <span class="tg t-doc">[PREENCHER: fechar a lista com o colegiado]</span>)
+  protege o usuário, protege o estagiário e aumenta a confiança da rede. Serviço que diz “atendemos tudo” não é
+  confiável para quem encaminha.
+</div>
+
+<h2 class="sec" id="s5"><span class="n">05</span> Tom de voz e limites éticos da divulgação</h2>
+
+<div class="alerta">
+  <b>Fundamento normativo — Código de Ética Profissional do Psicólogo, Art. 20.</b> O psicólogo, ao promover
+  publicamente seus serviços, por quaisquer meios: <i>a)</i> informará nome completo, CRP e número de registro;
+  <i>b)</i> fará referência apenas a títulos ou qualificações que possua; <i>c)</i> divulgará somente qualificações,
+  atividades e recursos relativos a técnicas e práticas reconhecidas ou regulamentadas pela profissão;
+  <i>d)</i> <b>não utilizará o preço do serviço como forma de propaganda</b>; <i>e)</i> <b>não fará previsão taxativa
+  de resultados</b>; <i>f)</i> não fará autopromoção em detrimento de outros profissionais; <i>g)</i> não proporá
+  atividades privativas de outras categorias; <i>h)</i> <b>não fará divulgação sensacionalista</b> das atividades
+  profissionais.
+  <br><br>A infração é disciplinar (Art. 21) e alcança o psicólogo responsável — no caso, o Responsável Técnico.
+  Por isso a regra de governança da seção 12: <b>nenhuma peça é publicada sem aprovação do RT</b>.
+</div>
+
+<h3 class="sub">Quatro princípios de voz</h3>
+<div class="cards">
+  <div class="card"><div class="k">Princípio 1</div><div class="v">Direto antes de acolhedor</div>
+    <div class="d">A primeira linha informa; o acolhimento vem depois. “Atendimento psicológico gratuito, com hora
+    marcada” antes de “estamos aqui por você”.</div></div>
+  <div class="card c2"><div class="k">Princípio 2</div><div class="v">Concreto, nunca abstrato</div>
+    <div class="d">Diga o que acontece: quanto tempo dura a triagem, quem estará na sala, o que a pessoa precisa levar,
+    em quanto tempo terá resposta.</div></div>
+  <div class="card c3"><div class="k">Princípio 3</div><div class="v">Sem promessa de resultado</div>
+    <div class="d">Vedação expressa do Art. 20-e. Nada de “supere a ansiedade”, “transforme sua vida”, “volte a ser
+    quem você era”.</div></div>
+  <div class="card c4"><div class="k">Princípio 4</div><div class="v">Sem dramatização</div>
+    <div class="d">Vedação do Art. 20-h. Nada de estatística de suicídio como chamariz, imagem de pessoa chorando no
+    escuro ou apelo emocional de campanha de doação.</div></div>
+</div>
+
+<h3 class="sub">Vocabulário</h3>
+<div class="duo">
+  <div class="box sim">
+    <h4>Preferir</h4>
+    <ul>
+      <li><b>“atendimento psicológico”</b> — mais amplo e menos intimidante que “psicoterapia”</li>
+      <li><b>“acolhimento”</b> e <b>“primeira conversa”</b> — e explicar o que é “triagem” sempre que o termo aparecer</li>
+      <li><b>“estudante de Psicologia sob supervisão de psicólogo”</b> — forma completa, sem eufemismo</li>
+      <li><b>“usuário”</b> ou <b>“pessoa atendida”</b> em documentos; <b>“você”</b> em peças dirigidas ao público</li>
+      <li><b>“gratuito”</b> ou <b>“custo social de R$ X”</b> — dito com clareza, sem virar chamariz de preço</li>
+    </ul>
+  </div>
+  <div class="box nao">
+    <h4>Evitar</h4>
+    <ul>
+      <li><b>Jargão teórico</b> (“abordagem fenomenológico-existencial”, “manejo transferencial”) em peça pública</li>
+      <li><b>Diagnóstico como isca</b> (“Você tem ansiedade? Faça o teste”) — sugere avaliação sem avaliar</li>
+      <li><b>“Tratamento”</b> como sinônimo de tudo — remete a modelo médico e cria expectativa de cura</li>
+      <li><b>Linguagem de autoajuda</b> e frases motivacionais sobre fundo colorido</li>
+      <li><b>“Vagas limitadas! Corra!”</b> — urgência comercial é incompatível com serviço de saúde</li>
+      <li><b>Depoimento de usuário</b>, mesmo autorizado, mesmo anônimo — a relação de assimetria contamina o consentimento</li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="sub">Exemplos aplicados</h3>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:16%">Situação</th><th style="width:42%">Como NÃO escrever</th><th style="width:42%">Como escrever</th></tr></thead>
+  <tbody>
+    <tr><td><b>Cartaz</b></td>
+      <td>“Sua saúde mental importa! Não sofra em silêncio. Venha cuidar de você.”</td>
+      <td>“Atendimento psicológico gratuito. Marque sua primeira conversa: [telefone/WhatsApp]. Serviço-Escola de Psicologia da FAOP.”</td></tr>
+    <tr><td><b>Post</b></td>
+      <td>“Nossa equipe de especialistas vai te ajudar a superar seus bloqueios.”</td>
+      <td>“Os atendimentos são feitos por estudantes de Psicologia da FAOP, sempre acompanhados por psicólogos supervisores. A primeira conversa dura cerca de 50 minutos.”</td></tr>
+    <tr><td><b>Resposta a contato</b></td>
+      <td>“Infelizmente estamos lotados, tente mais tarde.”</td>
+      <td>“No momento estamos com a agenda completa. Podemos colocar seu nome na lista de espera e retornamos em até [X] dias úteis. Se a situação for urgente, procure [CAPS/UBS] ou ligue 188 (CVV).”</td></tr>
+    <tr><td><b>Ofício à rede</b></td>
+      <td>“Estamos à disposição para atender qualquer demanda encaminhada.”</td>
+      <td>“Recebemos encaminhamentos para acompanhamento psicológico continuado de [público/faixas]. Não atendemos urgência psiquiátrica nem demandas periciais. A contrarreferência é enviada em até [X] dias após o acolhimento.”</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="sec" id="s6"><span class="n">06</span> Identidade visual</h2>
+<p class="lead">O sistema visual do SEP <b>não é novo</b>: é um recorte do sistema FAOP, com uma cor-âncora própria.
+Essa escolha é deliberada — material de serviço-escola é produzido por muitas mãos (estagiários, secretaria,
+coordenação), em Word e Canva, sem designer dedicado. Um sistema que exige fonte comprada ou arte vetorial complexa
+não sobrevive ao segundo mês.</p>
+
+<h3 class="sub">Cor-âncora: azul institucional</h3>
+<div class="info">
+  <b>Proposta:</b> o SEP adota o <b>azul do brasão da FAOP (#0A5AA0)</b> como cor-âncora, mantendo o verde como cor de
+  endosso institucional e o dourado como acento.<br><br>
+  <b>Por quê:</b> (1) o azul já pertence ao brasão — não se inventa cor fora do sistema; (2) diferencia o material do
+  SEP dos materiais acadêmicos gerais, que são predominantemente verdes, facilitando o reconhecimento na parede e na
+  mesa; (3) tem leitura culturalmente estável de cuidado, saúde e confiança, sem o peso hospitalar do branco-e-azul
+  clínico nem a informalidade de tons pastel.
+</div>
+
+<div class="swatches">
+  <div class="sw"><div class="chip-color" style="background:#0A5AA0"></div><div class="meta">
+    <div class="nm">Azul SEP</div><div class="hx">#0A5AA0</div>
+    <div class="role">Cor-âncora. Títulos, tarjas, filete de assinatura, elementos de destaque.</div></div></div>
+  <div class="sw"><div class="chip-color" style="background:#06407A"></div><div class="meta">
+    <div class="nm">Azul SEP escuro</div><div class="hx">#06407A</div>
+    <div class="role">Cabeçalhos de tabela, texto sobre fundo claro, contraste AA.</div></div></div>
+  <div class="sw"><div class="chip-color" style="background:#E4EEF7"></div><div class="meta">
+    <div class="nm">Azul tint</div><div class="hx">#E4EEF7</div>
+    <div class="role">Fundos de caixa, destaques suaves, tarja de informação.</div></div></div>
+  <div class="sw"><div class="chip-color" style="background:#0B4D24"></div><div class="meta">
+    <div class="nm">Verde FAOP</div><div class="hx">#0B4D24</div>
+    <div class="role">Endosso institucional. Assinatura conjunta, rodapé, brasão.</div></div></div>
+  <div class="sw"><div class="chip-color" style="background:#F2C200"></div><div class="meta">
+    <div class="nm">Dourado FAOP</div><div class="hx">#F2C200</div>
+    <div class="role">Acento. Selos, chamadas curtas, filete. Nunca como fundo de texto longo.</div></div></div>
+  <div class="sw"><div class="chip-color" style="background:#C62828"></div><div class="meta">
+    <div class="nm">Vermelho</div><div class="hx">#C62828</div>
+    <div class="role">Exclusivo para alerta e informação de segurança (canal de emergência). Nunca decorativo.</div></div></div>
+</div>
+
+<div class="notas"><b>Regra de proporção.</b> Numa peça do SEP: cerca de 60% branco e respiro, 25% azul, 10% verde
+(endosso), 5% dourado. Peça saturada de cor lê como panfleto comercial e perde a leitura de serviço institucional.</div>
+
+<h3 class="sub">Assinatura visual — proposta</h3>
+<p>Construção: brasão FAOP + filete tricolor + bloco de texto em duas linhas. O filete é o elemento de articulação
+entre marca-mãe e submarca e se repete como faixa no topo de todos os documentos.</p>
+
+<div class="assinatura">
+  <div class="amostra">
+    <svg width="330" height="66" viewBox="0 0 330 66" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assinatura principal do SEP FAOP">
+      <rect x="0" y="6" width="54" height="54" rx="6" fill="#0B4D24"/>
+      <text x="27" y="40" text-anchor="middle" font-family="Segoe UI,Arial" font-size="20" font-weight="700" fill="#fff">FAOP</text>
+      <rect x="66" y="6" width="3" height="18" fill="#00A030"/>
+      <rect x="66" y="24" width="3" height="18" fill="#F2C200"/>
+      <rect x="66" y="42" width="3" height="18" fill="#0A5AA0"/>
+      <text x="82" y="30" font-family="Segoe UI,Arial" font-size="16.5" font-weight="700" fill="#06407A">Serviço-Escola de Psicologia</text>
+      <text x="82" y="48" font-family="Segoe UI,Arial" font-size="11" font-weight="600" fill="#0B4D24" letter-spacing="1.6">FACULDADE DO OESTE POTIGUAR</text>
+    </svg>
+    <div class="cap">Principal — horizontal</div>
+  </div>
+
+  <div class="amostra">
+    <svg width="200" height="78" viewBox="0 0 200 78" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assinatura reduzida do SEP">
+      <rect x="73" y="2" width="54" height="30" rx="5" fill="#0B4D24"/>
+      <text x="100" y="24" text-anchor="middle" font-family="Segoe UI,Arial" font-size="15" font-weight="700" fill="#fff">FAOP</text>
+      <rect x="60" y="40" width="26.6" height="3" fill="#00A030"/>
+      <rect x="86.6" y="40" width="26.6" height="3" fill="#F2C200"/>
+      <rect x="113.2" y="40" width="26.8" height="3" fill="#0A5AA0"/>
+      <text x="100" y="61" text-anchor="middle" font-family="Segoe UI,Arial" font-size="19" font-weight="700" fill="#06407A" letter-spacing="2">SEP</text>
+      <text x="100" y="73" text-anchor="middle" font-family="Segoe UI,Arial" font-size="8" font-weight="600" fill="#0B4D24" letter-spacing="1.1">SERVIÇO-ESCOLA DE PSICOLOGIA</text>
+    </svg>
+    <div class="cap">Reduzida — crachá, carimbo, selo</div>
+  </div>
+
+  <div class="amostra dark">
+    <svg width="330" height="66" viewBox="0 0 330 66" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assinatura em negativo">
+      <rect x="0" y="6" width="54" height="54" rx="6" fill="#fff"/>
+      <text x="27" y="40" text-anchor="middle" font-family="Segoe UI,Arial" font-size="20" font-weight="700" fill="#0B4D24">FAOP</text>
+      <rect x="66" y="6" width="3" height="18" fill="#00A030"/>
+      <rect x="66" y="24" width="3" height="18" fill="#F2C200"/>
+      <rect x="66" y="42" width="3" height="18" fill="#48A2EB"/>
+      <text x="82" y="30" font-family="Segoe UI,Arial" font-size="16.5" font-weight="700" fill="#fff">Serviço-Escola de Psicologia</text>
+      <text x="82" y="48" font-family="Segoe UI,Arial" font-size="11" font-weight="600" fill="rgba(255,255,255,.82)" letter-spacing="1.6">FACULDADE DO OESTE POTIGUAR</text>
+    </svg>
+    <div class="cap">Negativa — fundo escuro, placa, deck</div>
+  </div>
+
+  <div class="amostra">
+    <svg width="330" height="66" viewBox="0 0 330 66" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assinatura monocromática">
+      <rect x="0" y="6" width="54" height="54" rx="6" fill="#232323"/>
+      <text x="27" y="40" text-anchor="middle" font-family="Segoe UI,Arial" font-size="20" font-weight="700" fill="#fff">FAOP</text>
+      <rect x="66" y="6" width="3" height="54" fill="#232323"/>
+      <text x="82" y="30" font-family="Segoe UI,Arial" font-size="16.5" font-weight="700" fill="#232323">Serviço-Escola de Psicologia</text>
+      <text x="82" y="48" font-family="Segoe UI,Arial" font-size="11" font-weight="600" fill="#555" letter-spacing="1.6">FACULDADE DO OESTE POTIGUAR</text>
+    </svg>
+    <div class="cap">Monocromática — carimbo, cópia P&amp;B</div>
+  </div>
+</div>
+
+<div class="notas"><b>Sobre estas amostras.</b> São <b>protótipos de construção</b>, não arte final. O bloco “FAOP” em
+caixa deve ser substituído pelo brasão oficial (<code class="hx">faop2.png</code>) na versão executiva. O que precisa
+ser preservado é a <b>estrutura</b>: brasão → filete tricolor → nome do serviço → endosso institucional em caixa alta.
+<span class="tg t-doc">[PREENCHER: validar com o setor de comunicação da FAOP]</span></div>
+
+<h3 class="sub">Área de proteção e tamanho mínimo</h3>
+<ul class="body">
+  <li><b>Área de proteção:</b> margem livre equivalente à altura da letra “F” do brasão em todos os lados. Nenhum texto, imagem ou borda invade essa área.</li>
+  <li><b>Tamanho mínimo:</b> 35 mm de largura em impressos; 140 px em tela. Abaixo disso, usar a versão reduzida (SEP).</li>
+  <li><b>Sobre fotografia:</b> apenas a versão negativa, sobre área de imagem homogênea e escura, ou sobre tarja sólida.</li>
+</ul>
+
+<h3 class="sub">Usos incorretos</h3>
+<div class="duo">
+  <div class="box nao">
+    <h4>Nunca fazer com a assinatura</h4>
+    <ul>
+      <li>Distorcer, inclinar, aplicar sombra, contorno ou gradiente</li>
+      <li>Trocar as cores do filete ou reordenar as três faixas</li>
+      <li>Usar o nome do serviço <b>sem o endosso FAOP</b></li>
+      <li>Aplicar sobre foto de baixo contraste sem tarja</li>
+      <li>Recriar o texto em outra fonte (script, serifada, condensada)</li>
+    </ul>
+  </div>
+  <div class="box nao">
+    <h4>Símbolos proibidos no material do SEP</h4>
+    <ul>
+      <li><b>Cruz, caduceu, bastão de Asclépio, estetoscópio</b> — Psicologia não é especialidade médica; o símbolo induz erro sobre a natureza do serviço</li>
+      <li><b>Cérebro, lâmpada, engrenagem na cabeça</b> — clichê e reduz o psicológico ao cognitivo</li>
+      <li><b>Peça de quebra-cabeça</b> — associada a campanhas sobre autismo e contestada por movimentos de pessoas autistas</li>
+      <li><b>Fita ou laço de campanha</b> (setembro amarelo, janeiro branco) na identidade permanente — pode ser usado em ação pontual, jamais na marca</li>
+      <li><b>Emojis</b> em peça institucional impressa; no digital, no máximo um, e nunca associado a sofrimento</li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="sub">Tipografia e imagem</h3>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:22%">Elemento</th><th style="width:38%">Definição</th><th style="width:40%">Justificativa</th></tr></thead>
+  <tbody>
+    <tr><td><b>Família tipográfica</b></td><td>Segoe UI → Roboto → Arial (pilha de fallback). Sem fonte comprada.</td>
+      <td>Disponível em qualquer máquina da faculdade, no Word e no Canva. Consistência real vale mais que sofisticação inalcançável.</td></tr>
+    <tr><td><b>Hierarquia</b></td><td>Título 22–26 pt bold · Subtítulo 14–16 pt semibold · Corpo 11–12 pt regular · Legenda 9–10 pt</td>
+      <td>Corpo nunca abaixo de 11 pt em material dirigido ao público — parte dos usuários é idosa.</td></tr>
+    <tr><td><b>Alinhamento</b></td><td>Sempre à esquerda. Nunca justificado, nunca centralizado em bloco de texto longo.</td>
+      <td>Legibilidade para leitores com menor fluência de leitura.</td></tr>
+    <tr><td><b>Contraste</b></td><td>Mínimo 4,5:1 entre texto e fundo. Texto branco só sobre #0A5AA0, #06407A ou #0B4D24.</td>
+      <td>Acessibilidade — critério WCAG AA. Dourado nunca recebe texto branco.</td></tr>
+    <tr><td><b>Fotografia</b></td><td><b>Proibido</b> fotografar usuários, salas em atendimento ou documentos com dados. Permitido: equipe, espaço vazio, fachada, eventos com autorização.</td>
+      <td>Sigilo profissional (Art. 9º do Código de Ética). Vale também para as redes pessoais dos estagiários.</td></tr>
+    <tr><td><b>Banco de imagem</b></td><td>Evitar retratos de sofrimento encenado (pessoa de mãos na cabeça, silhueta na janela).</td>
+      <td>Divulgação sensacionalista é vedada pelo Art. 20-h e afasta quem hesita em procurar ajuda.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="sec" id="s7"><span class="n">07</span> Manual de aplicação — peças</h2>
+<p class="lead">Onze peças. As marcadas como <span class="tg t-crit">CRÍTICO</span> precisam existir antes de 27/08;
+as demais entram no Tempo 2.</p>
+
+<div class="wrap">
+<table class="sep">
+  <thead><tr><th style="width:4%">#</th><th style="width:19%">Peça</th><th style="width:11%">Formato</th><th style="width:38%">Conteúdo obrigatório</th><th style="width:14%">Responsável</th><th style="width:14%">Prazo</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>Placa de identificação</b> <span class="tg t-crit">CRÍTICO</span></td><td>Acrílico ou PVC, porta e fachada</td>
+      <td>Assinatura completa · “Atendimento psicológico gratuito” · horário de funcionamento · nome e CRP do Responsável Técnico</td><td>RT + Infraestrutura</td><td>Até 21/08</td></tr>
+    <tr><td>2</td><td><b>Sinalização interna</b> <span class="tg t-crit">CRÍTICO</span></td><td>A4/A5 em moldura</td>
+      <td>Salas 1 a 4 · sala de espera · aviso “Atendimento em curso — favor não interromper” · orientação de silêncio · rota de saída</td><td>Coordenação SEP</td><td>Até 21/08</td></tr>
+    <tr><td>3</td><td><b>Crachá do estagiário</b> <span class="tg t-crit">CRÍTICO</span></td><td>Cartão vertical + cordão</td>
+      <td>Nome · foto · <b>“Estagiário(a) de Psicologia”</b> em destaque · período · assinatura reduzida SEP · nome e CRP do supervisor no verso</td><td>Coordenação SEP</td><td>Até 17/08</td></tr>
+    <tr><td>4</td><td><b>Cartão de resposta interno</b> <span class="tg t-crit">CRÍTICO</span></td><td>A5 plastificado, balcão e portaria</td>
+      <td>As 6 perguntas que a secretaria e a portaria vão receber, com resposta pronta: o que é · para quem · quanto custa · como agendar · quanto tempo espera · o que fazer se for urgência</td><td>RT</td><td>Até 17/08</td></tr>
+    <tr><td>5</td><td><b>Folder do usuário</b> <span class="tg t-crit">CRÍTICO</span></td><td>A5, frente e verso</td>
+      <td>Versão em linguagem simples da Carta de Serviços: quem somos · o que oferecemos · como ser atendido · seus direitos · sigilo · custos · contato · canal de emergência</td><td>RT</td><td>Até 24/08</td></tr>
+    <tr><td>6</td><td><b>Folder técnico da rede</b> <span class="tg t-crit">CRÍTICO</span></td><td>A4 dobrado em 3</td>
+      <td><b>O que atendemos · o que NÃO atendemos</b> · faixas etárias · modalidades · como encaminhar · prazo de resposta · como funciona a contrarreferência · RT e CRP</td><td>RT</td><td>Até 17/08</td></tr>
+    <tr><td>7</td><td><b>Cartaz</b></td><td>A3</td>
+      <td>Uma mensagem só: gratuito + como agendar + assinatura. Sem parágrafo, sem imagem de sofrimento</td><td>Coordenação SEP</td><td>Até 24/08</td></tr>
+    <tr><td>8</td><td><b>Papelaria e documentos</b> <span class="tg t-crit">CRÍTICO</span></td><td>Modelos .docx</td>
+      <td>Cabeçalho padrão com assinatura conjunta aplicado a: prontuário, ficha de triagem, TCLE, declaração de comparecimento, ofício de encaminhamento e contrarreferência</td><td>RT</td><td>Até 17/08</td></tr>
+    <tr><td>9</td><td><b>Ofício de apresentação à rede</b> <span class="tg t-crit">CRÍTICO</span></td><td>Carta institucional</td>
+      <td>Apresentação do serviço · assinatura da Coordenação e do RT · anexa o folder técnico · convite para a abertura em 27/08</td><td>Coordenação do curso</td><td>Até 14/08</td></tr>
+    <tr><td>10</td><td><b>Deck institucional</b></td><td>Slides 16:9</td>
+      <td>Apresentação de 10 a 12 slides para colegiado, rede e parceiros — reaproveita o padrão já usado em 2026.2</td><td>RT</td><td>Tempo 2 (set.)</td></tr>
+    <tr><td>11</td><td><b>Relatório semestral de atividades</b></td><td>PDF + HTML</td>
+      <td>Prestação de contas à comunidade e ao colegiado: nº de acolhimentos, origem dos encaminhamentos, modalidades, encaminhamentos feitos à rede</td><td>RT</td><td>Tempo 2 (dez.)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="alerta">
+  <b>Regra de sigilo aplicada a todo material.</b> Nenhuma peça — impressa, digital ou de apresentação — pode conter
+  imagem de usuário, iniciais, relato de caso ainda que anonimizado, ou fotografia de sala em uso. A regra vale
+  igualmente para as <b>redes pessoais dos estagiários</b>: “meu primeiro atendimento”, foto da sala, story da porta
+  com paciente na espera. Esta cláusula deve constar do <b>Termo e Plano Individual de Estágio</b>, assinado por todos
+  antes de 17/08.
+</div>
+
+<h3 class="sub">Conteúdo do cartão de resposta interno (peça 4) — texto sugerido</h3>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:30%">Pergunta que vão fazer</th><th style="width:70%">Resposta pronta</th></tr></thead>
+  <tbody>
+    <tr><td>“O que é o Serviço-Escola?”</td><td>“É o serviço de atendimento psicológico da FAOP. Os atendimentos são feitos por estudantes de Psicologia, sempre acompanhados por psicólogos supervisores.”</td></tr>
+    <tr><td>“Quem pode ser atendido?”</td><td>“<span class="tg t-doc">[PREENCHER: público e faixas etárias]</span>, conforme a disponibilidade de vagas.”</td></tr>
+    <tr><td>“Quanto custa?”</td><td>“<span class="tg t-doc">[PREENCHER: gratuito ou custo social de R$ X]</span>. Essa informação é sempre dada antes do início do atendimento.”</td></tr>
+    <tr><td>“Como faço para marcar?”</td><td>“<span class="tg t-doc">[PREENCHER: forma de agendamento]</span>. A primeira conversa é o acolhimento, dura cerca de 50 minutos, e é nela que definimos o melhor caminho.”</td></tr>
+    <tr><td>“Quanto tempo vou esperar?”</td><td>“Depende da disponibilidade. Anotamos seu contato e retornamos em até <span class="tg t-doc">[X]</span> dias úteis. Se não houver vaga agora, você fica na lista e é avisado.”</td></tr>
+    <tr><td>“E se for urgente?”</td><td>“Este serviço não atende urgência. Em caso de risco imediato, procure <span class="tg t-doc">[CAPS / UBS / UPA local]</span>, ligue 192 (SAMU) ou 188 (CVV, 24 h, gratuito).”</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="sec" id="s8"><span class="n">08</span> Canais — e uma recomendação contraintuitiva</h2>
+
+<div class="alerta">
+  <b>Recomendação: não criar perfil próprio em redes sociais no primeiro semestre.</b><br>
+  Um perfil próprio parece o passo natural, mas cria três obrigações que o serviço ainda não tem estrutura para cumprir:
+  <ul>
+    <li><b>Responder mensagem direta com conteúdo clínico.</b> Uma pessoa em sofrimento agudo vai escrever na DM, à
+    noite, no fim de semana. Sem protocolo e sem plantão, a demora na resposta deixa de ser falha de comunicação e
+    passa a ser risco assistencial — e responsabilidade do RT.</li>
+    <li><b>Alimentação constante.</b> Perfil abandonado com última postagem em setembro comunica serviço desativado.</li>
+    <li><b>Moderação de comentário.</b> Comentário público relatando situação pessoal expõe o autor e exige remoção
+    imediata e cuidadosa.</li>
+  </ul>
+  <b>Alternativa para 2026.2:</b> comunicar pelo <b>perfil institucional da FAOP</b>, com o SEP identificado por
+  assinatura visual nas peças, e concentrar o contato direto no <b>WhatsApp institucional com horário declarado</b>.
+  Reavaliar a criação de perfil próprio em 2027.1, já com protocolo de resposta escrito.
+</div>
+
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:18%">Canal</th><th style="width:10%">Status 2026.2</th><th style="width:34%">Função</th><th style="width:38%">Regra de operação</th></tr></thead>
+  <tbody>
+    <tr><td><b>Presencial — balcão e portaria</b></td><td><span class="tg t-ok">Principal</span></td>
+      <td>Porta de entrada real. A maior parte do primeiro contato acontece aqui.</td>
+      <td>Cartão de resposta (peça 4) visível. Equipe treinada até 17/08. Nunca improvisar informação sobre vaga ou custo.</td></tr>
+    <tr><td><b>WhatsApp institucional</b></td><td><span class="tg t-ok">Principal</span></td>
+      <td>Agendamento, confirmação de sessão, lista de espera.</td>
+      <td>Número <b>exclusivo do serviço</b>, jamais pessoal. Mensagem automática com horário de atendimento e frase de
+      segurança: “Este canal não atende emergências. Em caso de risco, ligue 188 (CVV) ou 192 (SAMU).” Sem conteúdo
+      clínico por escrito.</td></tr>
+    <tr><td><b>Telefone fixo institucional</b></td><td>Apoio</td><td>Público que não usa WhatsApp — parcela relevante entre idosos.</td>
+      <td>Mesmo roteiro do balcão. Registrar contatos não atendidos.</td></tr>
+    <tr><td><b>Ofício e visita à rede</b></td><td><span class="tg t-ok">Principal</span></td>
+      <td>Construção do fluxo de encaminhamento. <b>Maior retorno por hora investida</b> em toda a estratégia.</td>
+      <td>Visita presencial com folder técnico em mãos, não apenas e-mail. Registrar interlocutor e data.</td></tr>
+    <tr><td><b>Perfil da FAOP nas redes</b></td><td>Apoio</td>
+      <td>Alcance amplo na abertura e em marcos do semestre.</td>
+      <td>Toda peça aprovada pelo RT antes da publicação. Comentário com relato pessoal: responder em privado e ocultar o comentário público.</td></tr>
+    <tr><td><b>Rádio e imprensa local</b></td><td>Apoio</td>
+      <td>Alcance junto ao público que não está em rede social — frequentemente o que mais precisa do serviço.</td>
+      <td>Release padrão e porta-voz único (RT ou Coordenação). Nunca entrevista sobre caso.</td></tr>
+    <tr><td><b>Perfil próprio do SEP</b></td><td><span class="tg t-crit">Adiado</span></td>
+      <td>—</td><td>Reavaliar em 2027.1, condicionado a protocolo escrito de resposta a mensagens e escala de moderação.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="sec" id="s9"><span class="n">09</span> Tempo 1 — Kit Mínimo Viável até 27/08</h2>
+<p class="lead">Cronograma ancorado no calendário já fechado do SEP: aulas teóricas de estágio de 03 a 14/08, operação
+interna a partir de 17/08, abertura oficial em 27/08 (quinta-feira, Dia do Psicólogo).</p>
+
+<div class="tl g">
+  <div class="dt">06 a 10/08 — Semana 1</div>
+  <div class="ti">Fechar as decisões que travam tudo</div>
+  <div class="tx">Levar ao colegiado: assinatura visual, cor-âncora e nomenclatura. Preencher os campos abertos da
+  Carta de Serviços — endereço, dias e horários, contatos, gratuidade ou custo social, CRP do RT, público e faixas
+  etárias, modalidades efetivamente ofertadas, canal de ouvidoria. <b>Nenhuma peça pode ser produzida antes disso</b>,
+  sob pena de retrabalho integral.</div>
+</div>
+<div class="tl">
+  <div class="dt">10 a 14/08 — Semana 2</div>
+  <div class="ti">Produzir o núcleo do kit</div>
+  <div class="tx">Assinatura visual em arquivo aberto e em PNG/PDF · cabeçalho padrão aplicado aos documentos
+  (peça 8) · crachás (3) · cartão de resposta (4) · folder técnico da rede (6) · ofício de apresentação (9),
+  assinado e pronto para entrega.</div>
+</div>
+<div class="tl d">
+  <div class="dt">17/08 — Início da operação interna <span class="tg t-crit">MARCO</span></div>
+  <div class="ti">Alinhar quem atende o telefone antes de quem atende o paciente</div>
+  <div class="tx">Reunião de 40 minutos com estagiários, secretaria e portaria: o que é o serviço, o que se pode e o
+  que não se pode dizer, regra de sigilo em redes pessoais, roteiro do cartão de resposta. Assinatura da cláusula de
+  comunicação no Termo e Plano Individual de Estágio. Ativação do WhatsApp institucional com mensagem automática.</div>
+</div>
+<div class="tl">
+  <div class="dt">17 a 21/08 — Semana 3 <span class="tg t-p1">PRIORIDADE MÁXIMA</span></div>
+  <div class="ti">Percorrer a rede, presencialmente</div>
+  <div class="tx">Entrega do ofício e do folder técnico em visita presencial: Centro de Reabilitação Municipal
+  (parceiro já estabelecido, começar por ele), UBS/eSF, CAPS, CRAS e CREAS, escolas da rede municipal e estadual,
+  Conselho Tutelar. Registrar interlocutor, telefone e data de cada visita — essa lista vira o cadastro de
+  encaminhadores. Instalação da placa (1) e da sinalização interna (2).</div>
+</div>
+<div class="tl">
+  <div class="dt">24 a 26/08 — Semana 4</div>
+  <div class="ti">Abrir para a comunidade, com expectativa calibrada</div>
+  <div class="tx">Cartazes (7) em pontos de fluxo — UBS, CRAS, escolas, comércio, igrejas, rodoviária. Folder do
+  usuário (5) disponível no balcão. Post no perfil da FAOP. Release para rádio e imprensa local.
+  <b>Regra:</b> anunciar “<span class="tg t-doc">[X]</span> vagas nesta primeira turma de atendimento”, e não convite
+  aberto — antecipa a limitação em vez de decepcionar depois.</div>
+</div>
+<div class="tl g">
+  <div class="dt">27/08 — Abertura oficial <span class="tg t-crit">MARCO</span></div>
+  <div class="ti">Dia do Psicólogo</div>
+  <div class="tx">Cerimônia curta (40 a 50 minutos): fala da Coordenação, fala do RT sobre o que o serviço é e o que
+  não é, apresentação da equipe de estagiários, visita guiada às salas <b>vazias</b>. Convidados: rede, gestão
+  municipal de saúde e assistência, CRP regional, imprensa local. Registro fotográfico apenas de equipe e espaço —
+  <b>nenhuma imagem de usuário</b>. Material distribuído: folder do usuário e folder técnico.</div>
+</div>
+
+<h3 class="sub">Checklist de aprovação para 27/08</h3>
+<ul class="check">
+  <li>Campos abertos da Carta de Serviços preenchidos e aprovados</li>
+  <li>Assinatura visual aprovada e disponível em arquivo aberto</li>
+  <li>Placa e sinalização interna instaladas</li>
+  <li>Crachás emitidos para todos os estagiários</li>
+  <li>Cartão de resposta na portaria e na secretaria, equipe treinada</li>
+  <li>Cláusula de comunicação e sigilo assinada por todos os estagiários</li>
+  <li>WhatsApp institucional ativo, com mensagem automática e frase de segurança</li>
+  <li>Folder técnico entregue presencialmente a, no mínimo, <b>8 pontos da rede</b></li>
+  <li>Folder do usuário e cartaz produzidos e distribuídos</li>
+  <li>Lista de critérios de <b>não</b> atendimento definida e publicada</li>
+  <li>Fluxo de emergência escrito e afixado no balcão</li>
+  <li>Todas as peças revisadas pelo RT à luz do Art. 20 do Código de Ética</li>
+</ul>
+
+<h2 class="sec" id="s10"><span class="n">10</span> Tempo 2 — Consolidação ao longo de 2026.2</h2>
+<p class="lead">Depois da abertura, a marca deixa de ser sobre divulgação e passa a ser sobre <b>consistência</b>. O
+objetivo do Tempo 2 não é ampliar o alcance: é <b>construir o ativo que sustenta 2027.1</b>.</p>
+
+<div class="tl">
+  <div class="dt">Setembro</div>
+  <div class="ti">Fechar o ciclo com quem encaminhou</div>
+  <div class="tx">Primeira rodada de <b>contrarreferência</b>: devolver ao serviço de origem o desfecho do
+  acolhimento. É a ação de maior impacto reputacional junto à rede e a que garante encaminhamento no semestre
+  seguinte. Primeira medição de indicadores (abaixo). Atenção: atendimentos <b>não param</b> na semana da AV1
+  (08 a 14/09), decisão já tomada para preservar o vínculo.</div>
+</div>
+<div class="tl d">
+  <div class="dt">Outubro</div>
+  <div class="ti">Reduzir falta e ampliar presença comunitária</div>
+  <div class="tx">Implantar lembrete de sessão por WhatsApp 24 horas antes — a medida isolada de maior efeito sobre
+  absenteísmo. Primeira ação comunitária: roda de conversa ou oficina com tema <b>definido pela demanda observada nas
+  triagens</b>, não pelo calendário de campanhas. <b>Evitar oportunismo de data</b>: aderir a mês temático sem
+  conteúdo próprio comunica marketing, não serviço. Atendimentos mantidos na semana da AV2 (19 a 23/10).</div>
+</div>
+<div class="tl g">
+  <div class="dt">Novembro <span class="tg t-crit">PONTO MAIS DELICADO</span></div>
+  <div class="ti">Encerrar sem romper</div>
+  <div class="tx">O último atendimento é em <b>19/11</b>. É aqui que a promessa de <i>continuidade</i> é testada.
+  Necessário: (a) comunicar o encerramento do ciclo ao usuário <b>com pelo menos 3 sessões de antecedência</b>, não
+  na última; (b) carta de encerramento explicando a retomada em 2027.1 e o procedimento de reinserção;
+  (c) comunicado à rede informando o período sem atendimento e para onde encaminhar nesse intervalo;
+  (d) devolutiva e encaminhamento formal dos casos que não podem esperar. <b>Um encerramento malfeito desfaz três
+  meses de construção de marca.</b></div>
+</div>
+<div class="tl">
+  <div class="dt">Dezembro</div>
+  <div class="ti">Transformar operação em ativo</div>
+  <div class="tx">Relatório semestral de atividades (peça 11), apresentado ao colegiado e enviado à rede e à gestão
+  municipal. Números concretos — quantos acolhidos, de onde vieram, quantos encaminhamentos devolvidos — valem mais
+  que qualquer peça publicitária na negociação de espaço, verba e parceria para 2027.1. Encerramento administrativo
+  em 30/11; o relatório fecha em dezembro.</div>
+</div>
+
+<h3 class="sub">Indicadores de marca — o que medir desde a primeira semana</h3>
+<div class="wrap">
+<table class="sep">
+  <thead><tr><th style="width:26%">Indicador</th><th style="width:34%">O que revela</th><th style="width:22%">Fonte</th><th style="width:18%">Meta 2026.2</th></tr></thead>
+  <tbody>
+    <tr><td><b>Origem do contato</b></td><td>Qual canal está de fato funcionando — e quais peças foram desperdício</td><td>Pergunta obrigatória no acolhimento: “como soube do serviço?”</td><td>50% ou mais via rede</td></tr>
+    <tr><td><b>Taxa de absenteísmo</b></td><td>Se a expectativa foi bem construída na entrada</td><td>Registro de agenda</td><td>Abaixo de 25%</td></tr>
+    <tr><td><b>Tempo médio de espera</b></td><td>Se a promessa de acesso é real</td><td>Data do contato × data do acolhimento</td><td><span class="tg t-doc">[PREENCHER]</span></td></tr>
+    <tr><td><b>Taxa de contrarreferência</b></td><td>Se estamos honrando o valor “vínculo com a rede”</td><td>Controle de encaminhamentos</td><td>100% dos casos encaminhados</td></tr>
+    <tr><td><b>Conclusão do ciclo</b></td><td>Se a promessa de continuidade se cumpre</td><td>Prontuário — % que chega a 19/11 com encerramento planejado</td><td>70% ou mais</td></tr>
+    <tr><td><b>Retorno qualitativo da rede</b></td><td>Reputação técnica junto a quem encaminha</td><td>Contato ativo com os 8 ou mais pontos visitados, ao fim do semestre</td><td>Rodada completa em nov.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="sec" id="s11"><span class="n">11</span> Riscos de marca e mitigação</h2>
+<div class="wrap">
+<table>
+  <thead><tr><th style="width:5%">#</th><th style="width:24%">Risco</th><th style="width:8%">Gravid.</th><th style="width:30%">Como se manifesta</th><th style="width:33%">Mitigação</th></tr></thead>
+  <tbody>
+    <tr><td><b>R1</b></td><td><b>Superdemanda na abertura</b></td><td><span class="tg t-crit">Alta</span></td>
+      <td>Campanha aberta gera mais contatos do que 4 salas absorvem; fila longa; “liguei e nunca me responderam”.</td>
+      <td>Hierarquia de públicos (seção 4); anunciar vagas limitadas; lista de espera com retorno prometido e cumprido; medir espera desde a semana 1.</td></tr>
+    <tr><td><b>R2</b></td><td><b>Descontinuidade entre semestres</b></td><td><span class="tg t-crit">Alta</span></td>
+      <td>Atendimento acaba em 19/11 e a pessoa se sente abandonada; troca de estagiário em 2027.1 lida como recomeço do zero.</td>
+      <td>Informar o horizonte semestral <b>já no acolhimento</b>; aviso 3 sessões antes; carta de encerramento; protocolo de transição documentado em prontuário.</td></tr>
+    <tr><td><b>R3</b></td><td><b>Quebra de sigilo em rede pessoal</b></td><td><span class="tg t-crit">Alta</span></td>
+      <td>Estagiário posta foto da sala, story “primeiro paciente”, comentário sobre caso em grupo de turma.</td>
+      <td>Cláusula expressa no Termo de Estágio; abordado na reunião de 17/08 com exemplos concretos; reforço em supervisão; consequência prevista no regimento.</td></tr>
+    <tr><td><b>R4</b></td><td><b>Confusão com serviço pago</b></td><td>Média</td>
+      <td>Uso da palavra “clínica”, identidade sofisticada demais, ausência da palavra “gratuito”.</td>
+      <td>Nomenclatura da seção 2; “gratuito” presente em toda peça de captação; assinatura sempre com endosso FAOP.</td></tr>
+    <tr><td><b>R5</b></td><td><b>Peça em desacordo com o Art. 20</b></td><td>Média</td>
+      <td>Post motivacional com promessa de resultado; uso do preço como chamariz; imagem sensacionalista.</td>
+      <td>Aprovação do RT antes de publicar (seção 12); checklist de 6 itens; nenhum estagiário publica em nome do serviço.</td></tr>
+    <tr><td><b>R6</b></td><td><b>Urgência chegando pelo canal errado</b></td><td><span class="tg t-crit">Alta</span></td>
+      <td>Pessoa em crise escreve no WhatsApp fora do horário ou aparece no balcão sem agendamento.</td>
+      <td>Frase de segurança na mensagem automática e no cartão de resposta; fluxo de emergência escrito e afixado; equipe de balcão treinada; articulação prévia com CAPS e UPA.</td></tr>
+    <tr><td><b>R7</b></td><td><b>Marca sem dono após a abertura</b></td><td>Média</td>
+      <td>Peças se degradam, cada um faz o seu, identidade se dispersa até dezembro.</td>
+      <td>Arquivos-fonte em pasta única com acesso da coordenação; regra de aprovação única; revisão do kit no início de 2027.1.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="sec" id="s12"><span class="n">12</span> Governança da marca</h2>
+
+<div class="cards">
+  <div class="card c3"><div class="k">Aprovação final</div><div class="v">Responsável Técnico</div>
+    <div class="d">Toda peça que mencione o serviço passa pelo RT antes de publicar. Fundamento: Arts. 20 e 21 do
+    Código de Ética — a responsabilidade pela divulgação recai sobre o psicólogo.</div></div>
+  <div class="card"><div class="k">Aprovação institucional</div><div class="v">Coordenação do curso</div>
+    <div class="d">Uso da marca FAOP, ofícios externos, relação com imprensa e gestão municipal.</div></div>
+  <div class="card c2"><div class="k">Execução</div><div class="v">Coordenação do SEP</div>
+    <div class="d">Produção das peças, guarda dos arquivos-fonte, controle de estoque de impressos.</div></div>
+  <div class="card c4"><div class="k">Vedado</div><div class="v">Publicação por estagiário</div>
+    <div class="d">Nenhum estagiário publica, responde ou representa o serviço publicamente em nome próprio.</div></div>
+</div>
+
+<h3 class="sub">Checklist obrigatório antes de publicar qualquer peça</h3>
+<ul class="check">
+  <li>Informa que o atendimento é feito por estudante sob supervisão de psicólogo?</li>
+  <li>Está livre de promessa ou previsão de resultado (Art. 20-e)?</li>
+  <li>Está livre de apelo sensacionalista ou dramatização do sofrimento (Art. 20-h)?</li>
+  <li>Traz nome e CRP do Responsável Técnico quando a peça promove o serviço (Art. 20-a)?</li>
+  <li>Traz a assinatura conjunta com o endosso FAOP?</li>
+  <li>Informa o canal correto para urgência, quando a peça convida ao contato?</li>
+</ul>
+<div class="ok"><b>Regra simples.</b> Se qualquer resposta for “não”, a peça não sai. Não há exceção por prazo.</div>
+
+<h3 class="sub">Guarda de arquivos</h3>
+<p>Todos os arquivos-fonte (assinatura em formato aberto, modelos .docx com cabeçalho, folders editáveis, cartazes)
+devem ficar em pasta única <code class="hx">Serviço-Escola/Marca/</code>, com acesso da coordenação e do RT.
+Peça sem arquivo-fonte é peça que morre na primeira atualização.</p>
+
+<h2 class="sec" id="s13"><span class="n">13</span> Decisões pendentes — o que precisa ser resolvido primeiro</h2>
+<p class="lead">Estas dez decisões travam a produção de todo o kit. São as mesmas lacunas já sinalizadas na minuta da
+Carta de Serviços ao Usuário — resolvê-las destrava simultaneamente a Carta, o folder, a placa e o cartão de resposta.</p>
+
+<div class="wrap">
+<table class="sep">
+  <thead><tr><th style="width:5%">#</th><th style="width:32%">Decisão</th><th style="width:24%">Quem decide</th><th style="width:14%">Prazo</th><th style="width:25%">O que trava se não sair</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>Público e faixas etárias atendidas</b></td><td>Colegiado + RT</td><td>10/08</td><td>Folder do usuário, folder técnico, cartão de resposta, cartaz</td></tr>
+    <tr><td>2</td><td><b>Modalidades efetivamente ofertadas</b> em 2026.2</td><td>RT + supervisores</td><td>10/08</td><td>Folder técnico da rede, ofício de apresentação</td></tr>
+    <tr><td>3</td><td><b>Lista de critérios de NÃO atendimento</b></td><td>Colegiado + RT</td><td>10/08</td><td>Folder técnico — sem ela, a rede encaminha o que não podemos absorver</td></tr>
+    <tr><td>4</td><td><b>Gratuidade ou custo social</b> (e valor)</td><td>Direção + Colegiado</td><td>10/08</td><td>Todas as peças de captação</td></tr>
+    <tr><td>5</td><td><b>Endereço, dias e horários</b> de funcionamento</td><td>Coordenação SEP</td><td>10/08</td><td>Placa, folder, cartaz, mensagem automática do WhatsApp</td></tr>
+    <tr><td>6</td><td><b>Forma de agendamento</b> da triagem</td><td>RT + secretaria</td><td>10/08</td><td>Cartão de resposta, cartaz, folder</td></tr>
+    <tr><td>7</td><td><b>Número de WhatsApp institucional</b> e telefone</td><td>Direção</td><td>14/08</td><td>Todas as peças com contato</td></tr>
+    <tr><td>8</td><td><b>CRP do RT</b> e nome da Coordenação do serviço</td><td>RT + Direção</td><td>10/08</td><td>Placa, ofícios, documentos — exigência do Art. 20-a</td></tr>
+    <tr><td>9</td><td><b>Canal de ouvidoria</b></td><td>Direção</td><td>14/08</td><td>Carta de Serviços e folder do usuário</td></tr>
+    <tr><td>10</td><td><b>Aprovação da assinatura visual e da cor-âncora</b></td><td>Colegiado + Comunicação FAOP</td><td>10/08</td><td>Absolutamente todas as peças</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="notas">
+  <b>Sugestão de encaminhamento.</b> As decisões 1 a 6, 8 e 10 podem ser resolvidas em <b>uma única reunião de
+  colegiado</b> na semana de 06 a 10/08, usando este documento e a minuta da Carta de Serviços como pauta. As
+  decisões 7 e 9 dependem da Direção e podem correr em paralelo. Sem essa reunião na primeira semana, o Kit Mínimo
+  Viável não fica pronto até 27/08.
+</div>
+
+<footer class="pg">
+  <span class="pill">Minuta 2026.2</span>
+  <span class="pill">Sujeita à aprovação institucional</span><br><br>
+  <b>Projeto de Marca — Serviço-Escola de Psicologia da FAOP.</b> Elaborado por Prof. Pedro Atuan de Medeiros Albino,
+  Responsável Técnico do SEP, agosto de 2026.<br>
+  Fundamentos: Código de Ética Profissional do Psicólogo (Resolução CFP nº 010/2005, em especial os Arts. 1º, 2º, 9º,
+  20 e 21) · Resolução CNE/CES nº 01/2023 · Projeto Pedagógico do Curso de Psicologia (PPC 2025) · Minutas do
+  Regimento Interno, da Carta de Serviços ao Usuário e do Termo e Plano Individual de Estágio do Serviço-Escola ·
+  Calendário Acadêmico FAOP 2026.2 · Kit de Marca FAOP.<br><br>
+  Este documento apoia a decisão do colegiado e da Direção; não substitui parecer jurídico, deliberação institucional
+  nem orientação do Conselho Regional de Psicologia.
+</footer>
+
+</div>
+</body>
+</html>
