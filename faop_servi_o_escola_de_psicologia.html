@@ -430,7 +430,7 @@
                 </div>
 
                 <!-- Grade de Serviços -->
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                     
                     <!-- Card 1 -->
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-sep-blue transition cursor-pointer group" onclick="openServiceModal('individual')">
@@ -445,13 +445,13 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-sep-blue transition cursor-pointer group" onclick="openServiceModal('infantojuvenil')">
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-sep-blue transition cursor-pointer group" onclick="openServiceModal('adolescentes')">
                         <div class="w-12 h-12 rounded-xl bg-sep-greenTint text-sep-green flex items-center justify-center text-xl mb-4 group-hover:bg-sep-green group-hover:text-white transition">
-                            <i class="fa-solid fa-child-reaching"></i>
+                            <i class="fa-solid fa-user-graduate"></i>
                         </div>
-                        <h3 class="text-lg font-bold mb-1 text-slate-800 dark:text-slate-100">Atendimento Infantojuvenil</h3>
+                        <h3 class="text-lg font-bold mb-1 text-slate-800 dark:text-slate-100">Atendimento para Adolescentes</h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
-                            Escuta e intervenção lúdica para crianças e adolescentes, mediante consentimento expresso e acompanhamento dos pais ou responsáveis legais.
+                            Escuta e suporte psicológico especializado para jovens de 12 a 17 anos, com consentimento e acompanhamento dos responsáveis legais.
                         </p>
                         <span class="text-sep-blue dark:text-blue-400 font-semibold text-xs inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver Detalhes do Acolhimento &rarr;</span>
                     </div>
@@ -469,18 +469,6 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-sep-blue transition cursor-pointer group" onclick="openServiceModal('casal')">
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 flex items-center justify-center text-xl mb-4 group-hover:bg-purple-700 group-hover:text-white transition">
-                            <i class="fa-solid fa-people-roof"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-1 text-slate-800 dark:text-slate-100">Casal e Família</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
-                            Espaço dialógico para melhoria dos padrões comunicacionais familiares e fortalecimento dos vínculos afetivos saudáveis.
-                        </p>
-                        <span class="text-sep-blue dark:text-blue-400 font-semibold text-xs inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver Detalhes do Acolhimento &rarr;</span>
-                    </div>
-
-                    <!-- Card 5 -->
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-sep-blue transition cursor-pointer group" onclick="openServiceModal('grupos')">
                         <div class="w-12 h-12 rounded-xl bg-sep-goldTint text-sep-goldDark flex items-center justify-center text-xl mb-4 group-hover:bg-sep-goldDark group-hover:text-white transition">
                             <i class="fa-solid fa-users"></i>
@@ -488,18 +476,6 @@
                         <h3 class="text-lg font-bold mb-1 text-slate-800 dark:text-slate-100">Grupos & Oficinas</h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
                             Rodas de conversa temáticas sobre ansiedade na universidade, habilidades socioemocionais e apoio a cuidadores e familiares.
-                        </p>
-                        <span class="text-sep-blue dark:text-blue-400 font-semibold text-xs inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver Detalhes do Acolhimento &rarr;</span>
-                    </div>
-
-                    <!-- Card 6 -->
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-sep-blue transition cursor-pointer group" onclick="openServiceModal('avaliacao')">
-                        <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center text-xl mb-4 group-hover:bg-slate-700 group-hover:text-white transition">
-                            <i class="fa-solid fa-clipboard-check"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-1 text-slate-800 dark:text-slate-100">Avaliação Psicológica</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
-                            Investigação estruturada de processos cognitivos e socioemocionais por meio de instrumentos validados pelo SATEPSI/CFP.
                         </p>
                         <span class="text-sep-blue dark:text-blue-400 font-semibold text-xs inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver Detalhes do Acolhimento &rarr;</span>
                     </div>
@@ -582,17 +558,17 @@
                             <h3 class="font-bold text-base sm:text-lg text-slate-800 dark:text-slate-100 mb-3">Selecione o tipo de acolhimento desejado:</h3>
                             <div class="grid sm:grid-cols-2 gap-3.5">
                                 <label class="flex items-start gap-3 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-sep-blue transition">
-                                    <input type="radio" name="modalidade" value="Psicoterapia Adulto / Idoso" class="mt-1 text-sep-blue focus:ring-sep-blue" checked>
+                                    <input type="radio" name="modalidade" value="Psicoterapia Individual (Adulto / Idoso)" class="mt-1 text-sep-blue focus:ring-sep-blue" checked>
                                     <div>
                                         <span class="font-bold block text-sm text-slate-800 dark:text-slate-100">Psicoterapia Adulto / Idoso</span>
                                         <span class="text-xs text-slate-500">Para pessoas a partir de 18 anos</span>
                                     </div>
                                 </label>
                                 <label class="flex items-start gap-3 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-sep-blue transition">
-                                    <input type="radio" name="modalidade" value="Atendimento Infantojuvenil" class="mt-1 text-sep-blue focus:ring-sep-blue">
+                                    <input type="radio" name="modalidade" value="Atendimento para Adolescentes" class="mt-1 text-sep-blue focus:ring-sep-blue">
                                     <div>
-                                        <span class="font-bold block text-sm text-slate-800 dark:text-slate-100">Infantojuvenil</span>
-                                        <span class="text-xs text-slate-500">Crianças e adolescentes com responsável</span>
+                                        <span class="font-bold block text-sm text-slate-800 dark:text-slate-100">Atendimento para Adolescentes</span>
+                                        <span class="text-xs text-slate-500">Jovens de 12 a 17 anos com responsável</span>
                                     </div>
                                 </label>
                                 <label class="flex items-start gap-3 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-sep-blue transition">
@@ -603,10 +579,10 @@
                                     </div>
                                 </label>
                                 <label class="flex items-start gap-3 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-sep-blue transition">
-                                    <input type="radio" name="modalidade" value="Outras Demandas (Casal, Grupo ou Avaliação)" class="mt-1 text-sep-blue focus:ring-sep-blue">
+                                    <input type="radio" name="modalidade" value="Grupos Terapêuticos e Oficinas" class="mt-1 text-sep-blue focus:ring-sep-blue">
                                     <div>
-                                        <span class="font-bold block text-sm text-slate-800 dark:text-slate-100">Outras Demandas</span>
-                                        <span class="text-xs text-slate-500">Família, grupos ou avaliação</span>
+                                        <span class="font-bold block text-sm text-slate-800 dark:text-slate-100">Grupos e Oficinas</span>
+                                        <span class="text-xs text-slate-500">Encontros temáticos e vivências</span>
                                     </div>
                                 </label>
                             </div>
@@ -932,30 +908,20 @@
                 icon: "fa-user",
                 desc: "Atendimento focado em demandas emocionais, autoconhecimento, transtornos de humor, ansiedade e processos de luto. O acompanhamento é realizado semanalmente pelo estagiário com suporte contínuo de supervisão docente especializada."
             },
-            infantojuvenil: {
-                title: "Atendimento Infantojuvenil",
-                icon: "fa-child-reaching",
-                desc: "Acolhimento clínico para crianças e adolescentes utilizando recursos lúdicos, entrevistas familiares e técnicas de manejo socioemocional, com participação ativa dos responsáveis legais em todo o processo."
+            adolescentes: {
+                title: "Atendimento para Adolescentes",
+                icon: "fa-user-graduate",
+                desc: "Acolhimento clínico individualizado para jovens de 12 a 17 anos em sofrimento psíquico, abordando desafios de desenvolvimento, ansiedade escolar e convivência interpessoal, com consentimento e acompanhamento dos responsáveis legais."
             },
             plantao: {
                 title: "Plantão de Acolhimento",
                 icon: "fa-clock-rotate-left",
                 desc: "Modalidade de intervenção pontual voltada para acolher momentos de sofrimento circunstancial agudo e clarificação da queixa. Auxilia na estabilização inicial e no encaminhamento adequado na rede."
             },
-            casal: {
-                title: "Terapia de Casal e Família",
-                icon: "fa-people-roof",
-                desc: "Espaço mediado para reorganização de vínculos, resolução de impasses comunicacionais e suporte mútuo nas fases de transição do ciclo de vida familiar."
-            },
             grupos: {
                 title: "Grupos Terapêuticos e Oficinas",
                 icon: "fa-users",
-                desc: "Encontros coletivos temáticos abordando manejo de ansiedade acadêmica, habilidades interpessoais, oficinas de suporte ao luto e rodas de conversa com cuidadores."
-            },
-            avaliacao: {
-                title: "Avaliação Psicológica",
-                icon: "fa-clipboard-check",
-                desc: "Investigação sistemática com instrumentos e testes validados pelo SATEPSI/CFP, entrevistas e elaboração cuidadosa de laudo devolutivo para fins acadêmicos e clínicos específicos."
+                desc: "Encontros coletivos temáticos abordando manejo de ansiedade acadêmica, habilidades interpessoais, oficinas de suporte ao luto e rodas de conversa."
             }
         };
 
