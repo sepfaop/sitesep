@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serviço-Escola de Psicologia (SEP) · FAOP | Aqui, ninguém escuta sozinho</title>
     <meta name="description" content="Serviço-Escola de Psicologia da Faculdade do Oeste Potiguar (FAOP). Atendimento psicológico supervisionado, continuado e gratuito em São Miguel - RN.">
+    <meta name="robots" content="index, follow">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="canonical" href="https://sepfaop.github.io/sitesep/">
 
-    <!-- Metatags de Compartilhamento / Open Graph & WhatsApp Preview -->
+    <!-- Metatags de Compartilhamento / Open Graph & WhatsApp Preview (URL Absoluta) -->
     <meta property="og:title" content="Serviço-Escola de Psicologia (SEP) · FAOP | Aqui, ninguém escuta sozinho">
     <meta property="og:description" content="Atendimento psicológico continuado, gratuito e supervisionado da Faculdade do Oeste Potiguar (FAOP) em São Miguel - RN.">
-    <meta property="og:image" content="og-image.png">
+    <meta property="og:image" content="https://sepfaop.github.io/sitesep/og-image.png">
+    <meta property="og:url" content="https://sepfaop.github.io/sitesep/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sepfaop.github.io/sitesep/og-image.png">
 
     <!-- Schema.org JSON-LD com Localização e Endereço Oficial -->
     <script type="application/ld+json">
@@ -21,7 +25,7 @@
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
       "name": "Serviço-Escola de Psicologia (SEP) · FAOP",
-      "image": "og-image.png",
+      "image": "https://sepfaop.github.io/sitesep/og-image.png",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Rua Francisca Bobô, 250, Centro",
@@ -47,10 +51,13 @@
     }
     </script>
 
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 6 Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <!-- Google Fonts: Inter & Outfit -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -88,19 +95,54 @@
     </script>
 
     <style>
-        /* Modo de Alto Contraste */
+        /* Modo de Alto Contraste Acessível (WCAG AAA) */
         .contrast-mode {
-            filter: grayscale(100%) contrast(160%);
             background-color: #000000 !important;
             color: #ffffff !important;
         }
-        .contrast-mode * {
-            background-color: transparent !important;
+        .contrast-mode body,
+        .contrast-mode header,
+        .contrast-mode main,
+        .contrast-mode section,
+        .contrast-mode footer,
+        .contrast-mode div,
+        .contrast-mode article {
+            background-color: #000000 !important;
             color: #ffffff !important;
             border-color: #ffffff !important;
         }
-        .contrast-mode .no-contrast-invert {
-            filter: invert(100%);
+        .contrast-mode a, 
+        .contrast-mode button:not(#btn-contrast):not(#btn-contrast-m) {
+            color: #FFE500 !important;
+        }
+        .contrast-mode input, 
+        .contrast-mode textarea, 
+        .contrast-mode select {
+            background-color: #121212 !important;
+            color: #ffffff !important;
+            border: 2px solid #FFE500 !important;
+        }
+
+        /* Notificação Toast Flutuante */
+        #toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            transform: translateY(120%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+        #toast-notification.show {
+            transform: translateY(0);
+        }
+
+        /* Input com erro de validação */
+        .input-error {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+        }
+        .dark .input-error {
+            background-color: #450a0a !important;
         }
 
         /* Barra de rolagem institucional */
@@ -204,7 +246,7 @@
                         <i class="fa-solid fa-moon dark:hidden"></i>
                         <i class="fa-solid fa-sun hidden dark:inline"></i>
                     </button>
-                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Abrir menu de navegação">
+                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobile-menu">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -212,13 +254,13 @@
         </div>
 
         <!-- Menu Mobile Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3">
-            <a href="#inicio" class="block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Início</a>
-            <a href="#sobre" class="block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Sobre o SEP</a>
-            <a href="#servicos" class="block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Modalidades</a>
-            <a href="#agendamento" class="block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Agendamento & Triagem</a>
-            <a href="#faq" class="block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Perguntas Frequentes</a>
-            <a href="#contato" class="block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Contato</a>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3" role="region" aria-label="Menu de Navegação Mobile">
+            <a href="#inicio" class="mobile-nav-link block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Início</a>
+            <a href="#sobre" class="mobile-nav-link block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Sobre o SEP</a>
+            <a href="#servicos" class="mobile-nav-link block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Modalidades</a>
+            <a href="#agendamento" class="mobile-nav-link block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Agendamento & Triagem</a>
+            <a href="#faq" class="mobile-nav-link block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Perguntas Frequentes</a>
+            <a href="#contato" class="mobile-nav-link block py-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-sep-blue">Contato</a>
             
             <div class="pt-4 flex flex-col gap-3">
                 <div class="flex justify-between items-center bg-slate-100 dark:bg-slate-800 p-2.5 rounded-lg">
@@ -229,7 +271,7 @@
                         <button id="btn-contrast-m" class="px-2 py-1 bg-white dark:bg-slate-700 text-xs rounded"><i class="fa-solid fa-circle-half-stroke"></i></button>
                     </div>
                 </div>
-                <a href="#agendamento" class="w-full text-center bg-sep-blue text-white font-semibold py-2.5 rounded-xl">
+                <a href="#agendamento" class="mobile-nav-link w-full text-center bg-sep-blue text-white font-semibold py-2.5 rounded-xl">
                     Solicitar Acolhimento
                 </a>
             </div>
@@ -508,7 +550,7 @@
         </section>
 
         <!-- Modal de Detalhes dos Serviços -->
-        <div id="service-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div id="service-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="if(event.target === this) closeServiceModal()">
             <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-200 dark:border-slate-700 space-y-4">
                 <button onclick="closeServiceModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl" aria-label="Fechar janela">
                     <i class="fa-solid fa-xmark"></i>
@@ -596,22 +638,29 @@
                         <!-- Passo 2: Dados Pessoais -->
                         <div id="wizard-step-2" class="space-y-4 hidden">
                             <h3 class="font-bold text-base sm:text-lg text-slate-800 dark:text-slate-100 mb-3">Informações para contato e triagem:</h3>
+                            
+                            <!-- Box de Erro Inline -->
+                            <div id="step2-error" class="hidden p-3 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 rounded-xl text-xs text-red-700 dark:text-red-300 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-exclamation text-red-600 flex-shrink-0"></i>
+                                <span id="step2-error-text">Por favor, preencha todos os campos obrigatórios marcados com (*).</span>
+                            </div>
+
                             <div class="grid sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Nome Completo *</label>
-                                    <input type="text" id="patient-name" required placeholder="Digite seu nome completo" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm">
+                                    <label for="patient-name" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Nome Completo *</label>
+                                    <input type="text" id="patient-name" required placeholder="Digite seu nome completo" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm transition">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Idade *</label>
-                                    <input type="number" id="patient-age" required min="1" max="110" placeholder="Ex: 24" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm">
+                                    <label for="patient-age" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Idade *</label>
+                                    <input type="number" id="patient-age" required min="1" max="110" placeholder="Ex: 24" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm transition">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Telefone / WhatsApp *</label>
-                                    <input type="tel" id="patient-phone" required placeholder="(84) 9____-____" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm">
+                                    <label for="patient-phone" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Telefone / WhatsApp *</label>
+                                    <input type="tel" id="patient-phone" required placeholder="(84) 99999-9999" maxlength="15" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm transition">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Bairro e Cidade *</label>
-                                    <input type="text" id="patient-city" required placeholder="Ex: Centro, São Miguel - RN" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm">
+                                    <label for="patient-city" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">Bairro e Cidade *</label>
+                                    <input type="text" id="patient-city" required placeholder="Ex: Centro, São Miguel - RN" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm transition">
                                 </div>
                             </div>
                             <div class="pt-6 flex justify-between">
@@ -654,7 +703,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">
+                                <label for="patient-reason" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1">
                                     Breve descrição da demanda (Confidencial/Opcional)
                                 </label>
                                 <textarea id="patient-reason" rows="3" placeholder="Ex: Dificuldade para lidar com ansiedade nos estudos, insônia, conflito recente..." class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-sep-blue outline-none text-sm"></textarea>
@@ -683,21 +732,50 @@
                                 </p>
                             </div>
 
-                            <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 max-w-md mx-auto text-left space-y-2 text-xs sm:text-sm shadow-sm">
-                                <p><strong>Protocolo:</strong> <span id="summary-protocol" class="text-sep-blue font-mono font-bold">#SEP-2026-0000</span></p>
-                                <p><strong>Nome:</strong> <span id="summary-name">-</span></p>
-                                <p><strong>Modalidade:</strong> <span id="summary-modalidade">-</span></p>
-                                <p><strong>Turno Indicado:</strong> <span id="summary-shift">-</span></p>
+                            <!-- Ficha Detalhada do Protocolo -->
+                            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-700 max-w-md mx-auto text-left space-y-2.5 text-xs sm:text-sm shadow-sm divide-y divide-slate-100 dark:divide-slate-800">
+                                <div class="pb-2 flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Protocolo Oficial:</span>
+                                    <span id="summary-protocol" class="text-sep-blue font-mono font-bold text-base">#SEP-2026-0000</span>
+                                </div>
+                                <div class="pt-2.5 grid grid-cols-2 gap-2.5 text-xs">
+                                    <div><strong class="text-slate-500 block">Nome:</strong> <span id="summary-name" class="font-semibold text-slate-800 dark:text-slate-200">-</span></div>
+                                    <div><strong class="text-slate-500 block">Idade:</strong> <span id="summary-age" class="font-semibold text-slate-800 dark:text-slate-200">-</span></div>
+                                    <div><strong class="text-slate-500 block">Contato:</strong> <span id="summary-phone" class="font-semibold text-slate-800 dark:text-slate-200">-</span></div>
+                                    <div><strong class="text-slate-500 block">Localidade:</strong> <span id="summary-city" class="font-semibold text-slate-800 dark:text-slate-200">-</span></div>
+                                </div>
+                                <div class="pt-2.5">
+                                    <strong class="text-slate-500 text-xs block">Modalidade Escolhida:</strong>
+                                    <span id="summary-modalidade" class="font-semibold text-slate-800 dark:text-slate-200 text-xs">-</span>
+                                </div>
+                                <div class="pt-2.5">
+                                    <strong class="text-slate-500 text-xs block">Turno de Preferência:</strong>
+                                    <span id="summary-shift" class="font-semibold text-slate-800 dark:text-slate-200 text-xs">-</span>
+                                </div>
+                                <div id="summary-reason-container" class="pt-2.5 hidden">
+                                    <strong class="text-slate-500 text-xs block">Demanda Inicial Registrada:</strong>
+                                    <p id="summary-reason" class="text-xs text-slate-700 dark:text-slate-300 italic mt-0.5">-</p>
+                                </div>
                             </div>
 
                             <div class="p-3 bg-sep-goldTint text-sep-goldDark rounded-xl text-xs max-w-md mx-auto text-left flex items-start gap-2.5">
                                 <i class="fa-solid fa-circle-info mt-0.5 text-sep-goldDark"></i>
-                                <span>A confirmação da primeira entrevista de acolhimento será realizada pela equipe da recepção do SEP conforme a disponibilidade da escala.</span>
+                                <span>A confirmação da primeira entrevista de acolhimento será realizada pela equipe da recepção do SEP conforme a disponibilidade da escala de salas.</span>
                             </div>
 
-                            <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-sep-green hover:bg-sep-greenLine text-white font-bold px-6 py-3.5 rounded-xl transition w-full sm:w-auto shadow-md">
-                                <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Comprovante para o WhatsApp do SEP
-                            </a>
+                            <!-- Botões de Ação do Passo 4 -->
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                                <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-sep-green hover:bg-sep-greenLine text-white font-bold px-6 py-3.5 rounded-xl transition flex-1 shadow-md">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Comprovante no WhatsApp
+                                </a>
+                                <button type="button" id="btn-copy-protocol" onclick="copyProtocolSummary()" class="inline-flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 font-semibold px-4 py-3.5 rounded-xl transition text-xs">
+                                    <i class="fa-regular fa-copy"></i> Copiar Dados
+                                </button>
+                            </div>
+
+                            <button type="button" onclick="resetWizard()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-sep-blue underline mt-2 block mx-auto">
+                                Iniciar nova solicitação de triagem
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -721,44 +799,44 @@
                     
                     <!-- Item 1 -->
                     <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-                        <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+                        <button id="faq-btn-1" onclick="toggleFaq(1)" aria-expanded="false" aria-controls="faq-answer-1" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
                             <span>1. O que é o Serviço-Escola de Psicologia da FAOP?</span>
                             <i id="faq-icon-1" class="fa-solid fa-chevron-down text-sep-blue transition-transform"></i>
                         </button>
-                        <div id="faq-answer-1" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
+                        <div id="faq-answer-1" role="region" aria-labelledby="faq-btn-1" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
                             É o serviço de atendimento psicológico vinculado ao Curso de Bacharelado em Psicologia da Faculdade do Oeste Potiguar. É um espaço de extensão universitária e formação prática onde a comunidade recebe atendimento continuado de qualidade prestado por estudantes dos últimos períodos da graduação, sempre orientados e supervisionados diretamente por professores psicólogos inscritos no CRP-17.
                         </div>
                     </div>
 
                     <!-- Item 2 -->
                     <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-                        <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+                        <button id="faq-btn-2" onclick="toggleFaq(2)" aria-expanded="false" aria-controls="faq-answer-2" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
                             <span>2. Quem vai me atender? É seguro ser atendido por estagiário?</span>
                             <i id="faq-icon-2" class="fa-solid fa-chevron-down text-sep-blue transition-transform"></i>
                         </button>
-                        <div id="faq-answer-2" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
+                        <div id="faq-answer-2" role="region" aria-labelledby="faq-btn-2" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
                             Sim, com absoluto rigor ético e técnico. Aqui ninguém escuta sozinho: cada caso é semanalmente discutido com psicólogos supervisores docentes com CRP ativo. Enquanto num consultório isolado o profissional trabalha só, no serviço-escola a intervenção é planejada coletivamente com respaldo científico constante.
                         </div>
                     </div>
 
                     <!-- Item 3 -->
                     <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-                        <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+                        <button id="faq-btn-3" onclick="toggleFaq(3)" aria-expanded="false" aria-controls="faq-answer-3" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
                             <span>3. O atendimento é gratuito? Como funciona a lista de espera?</span>
                             <i id="faq-icon-3" class="fa-solid fa-chevron-down text-sep-blue transition-transform"></i>
                         </button>
-                        <div id="faq-answer-3" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
+                        <div id="faq-answer-3" role="region" aria-labelledby="faq-btn-3" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
                             Os atendimentos do SEP são gratuitos, cumprindo o papel social e acadêmico da FAOP. O tempo de espera varia de acordo com o número de salas disponíveis (4 salas ativas) e os horários das turmas de estágio supervisionado. Os contatos são chamados seguindo a ordem de pré-cadastro e a urgência identificada no acolhimento inicial.
                         </div>
                     </div>
 
                     <!-- Item 4 -->
                     <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-                        <button onclick="toggleFaq(4)" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+                        <button id="faq-btn-4" onclick="toggleFaq(4)" aria-expanded="false" aria-controls="faq-answer-4" class="w-full flex justify-between items-center p-5 text-left font-bold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
                             <span>4. O que devo fazer se eu ou alguém próximo estiver em risco de crise urgente?</span>
                             <i id="faq-icon-4" class="fa-solid fa-chevron-down text-sep-blue transition-transform"></i>
                         </button>
-                        <div id="faq-answer-4" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
+                        <div id="faq-answer-4" role="region" aria-labelledby="faq-btn-4" class="hidden p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 mt-2 leading-relaxed">
                             O SEP <strong>não possui serviço de pronto-socorro nem plantão psiquiátrico noturno</strong>. Em situações de ideação suicida imediata, surtos psicóticos ou risco de vida iminente, procure sem demora o <strong>CAPS</strong> mais próximo, a <strong>UPA</strong> ou acione os números de emergência gratuitos: <strong>SAMU (192)</strong> ou <strong>CVV (188)</strong>, com suporte 24 horas por dia.
                         </div>
                     </div>
@@ -899,6 +977,12 @@
         </div>
     </footer>
 
+    <!-- Notificação Toast Flutuante -->
+    <div id="toast-notification" class="bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm font-semibold border border-slate-700/50 opacity-0 pointer-events-none" role="status" aria-live="polite">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toast-message">Dados copiados para a área de transferência!</span>
+    </div>
+
     <!-- Lógica Interativa em JavaScript Puro -->
     <script>
         // Dados das Modalidades para os Modais
@@ -925,9 +1009,12 @@
             }
         };
 
+        let lastFocusedElement = null;
+
         function openServiceModal(key) {
             const data = servicesData[key];
             if (!data) return;
+            lastFocusedElement = document.activeElement;
             const contentHTML = `
                 <div class="flex items-center gap-3 text-sep-blue mb-2">
                     <i class="fa-solid ${data.icon} text-2xl"></i>
@@ -937,82 +1024,275 @@
             `;
             document.getElementById('modal-content').innerHTML = contentHTML;
             document.getElementById('service-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
         }
 
         function closeServiceModal() {
-            document.getElementById('service-modal').classList.add('hidden');
+            const modal = document.getElementById('service-modal');
+            if (modal) modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+                lastFocusedElement = null;
+            }
         }
 
-        // Acordeão do FAQ
+        // Fechamento de modais com a tecla ESC
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeServiceModal();
+            }
+        });
+
+        // Acordeão do FAQ com Acessibilidade ARIA
         function toggleFaq(id) {
             const ans = document.getElementById(`faq-answer-${id}`);
             const icon = document.getElementById(`faq-icon-${id}`);
-            if (ans.classList.contains('hidden')) {
+            const btn = document.getElementById(`faq-btn-${id}`);
+            if (!ans) return;
+
+            const isHidden = ans.classList.contains('hidden');
+            if (isHidden) {
                 ans.classList.remove('hidden');
-                icon.classList.add('rotate-180');
+                icon?.classList.add('rotate-180');
+                btn?.setAttribute('aria-expanded', 'true');
             } else {
                 ans.classList.add('hidden');
-                icon.classList.remove('rotate-180');
+                icon?.classList.remove('rotate-180');
+                btn?.setAttribute('aria-expanded', 'false');
             }
         }
 
         // Wizard de Triagem
         function nextWizardStep(step) {
             for (let i = 1; i <= 4; i++) {
-                document.getElementById(`wizard-step-${i}`).classList.add('hidden');
+                const el = document.getElementById(`wizard-step-${i}`);
+                if (el) el.classList.add('hidden');
                 const label = document.getElementById(`step-label-${i}`);
                 if (label) label.classList.remove('text-sep-blue', 'font-bold');
             }
-            document.getElementById(`wizard-step-${step}`).classList.remove('hidden');
-            document.getElementById(`step-label-${step}`).classList.add('text-sep-blue', 'font-bold');
+            const targetStep = document.getElementById(`wizard-step-${step}`);
+            if (targetStep) targetStep.classList.remove('hidden');
+            const targetLabel = document.getElementById(`step-label-${step}`);
+            if (targetLabel) targetLabel.classList.add('text-sep-blue', 'font-bold');
             
             const progress = document.getElementById('wizard-progress');
-            progress.style.width = `${(step / 4) * 100}%`;
+            if (progress) progress.style.width = `${(step / 4) * 100}%`;
         }
 
+        // Validação Inline do Passo 2 (sem alert intrusivo)
         function validateStep2() {
+            const nameEl = document.getElementById('patient-name');
+            const ageEl = document.getElementById('patient-age');
+            const phoneEl = document.getElementById('patient-phone');
+            const cityEl = document.getElementById('patient-city');
+            const errorBox = document.getElementById('step2-error');
+
+            const name = nameEl.value.trim();
+            const age = ageEl.value.trim();
+            const phone = phoneEl.value.trim();
+            const city = cityEl.value.trim();
+
+            let hasError = false;
+
+            [nameEl, ageEl, phoneEl, cityEl].forEach(el => el.classList.remove('input-error'));
+
+            if (!name) { nameEl.classList.add('input-error'); hasError = true; }
+            if (!age) { ageEl.classList.add('input-error'); hasError = true; }
+            if (!phone || phone.length < 14) { phoneEl.classList.add('input-error'); hasError = true; }
+            if (!city) { cityEl.classList.add('input-error'); hasError = true; }
+
+            if (hasError) {
+                if (errorBox) {
+                    errorBox.classList.remove('hidden');
+                    document.getElementById('step2-error-text').innerText = 'Por favor, preencha todos os campos obrigatórios (*) com dados válidos.';
+                }
+                return;
+            }
+
+            if (errorBox) errorBox.classList.add('hidden');
+            saveTriageDraft();
+            nextWizardStep(3);
+        }
+
+        // Limpeza visual de erro ao digitar
+        ['patient-name', 'patient-age', 'patient-phone', 'patient-city'].forEach(id => {
+            document.getElementById(id)?.addEventListener('input', (e) => {
+                e.target.classList.remove('input-error');
+                const errorBox = document.getElementById('step2-error');
+                if (errorBox) errorBox.classList.add('hidden');
+                saveTriageDraft();
+            });
+        });
+
+        // Máscara dinâmica de telefone
+        const phoneInput = document.getElementById('patient-phone');
+        phoneInput?.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.substring(0, 11);
+            if (v.length > 10) {
+                e.target.value = `(${v.substring(0,2)}) ${v.substring(2,7)}-${v.substring(7)}`;
+            } else if (v.length > 6) {
+                e.target.value = `(${v.substring(0,2)}) ${v.substring(2,6)}-${v.substring(6)}`;
+            } else if (v.length > 2) {
+                e.target.value = `(${v.substring(0,2)}) ${v.substring(2)}`;
+            } else {
+                e.target.value = v;
+            }
+        });
+
+        // Salvar rascunho de contingência no localStorage
+        function saveTriageDraft() {
+            try {
+                const draft = {
+                    name: document.getElementById('patient-name')?.value || '',
+                    age: document.getElementById('patient-age')?.value || '',
+                    phone: document.getElementById('patient-phone')?.value || '',
+                    city: document.getElementById('patient-city')?.value || '',
+                    reason: document.getElementById('patient-reason')?.value || '',
+                    modalidade: document.querySelector('input[name="modalidade"]:checked')?.value || '',
+                    shift: document.querySelector('input[name="shift"]:checked')?.value || ''
+                };
+                localStorage.setItem('sep_triage_draft', JSON.stringify(draft));
+            } catch (e) {
+                // Ignore storage limits / incognito restrictions
+            }
+        }
+
+        // Restaurar rascunho salvo ao carregar
+        function restoreTriageDraft() {
+            try {
+                const saved = localStorage.getItem('sep_triage_draft');
+                if (!saved) return;
+                const d = JSON.parse(saved);
+                if (d.name) document.getElementById('patient-name').value = d.name;
+                if (d.age) document.getElementById('patient-age').value = d.age;
+                if (d.phone) document.getElementById('patient-phone').value = d.phone;
+                if (d.city) document.getElementById('patient-city').value = d.city;
+                if (d.reason) document.getElementById('patient-reason').value = d.reason;
+            } catch (e) {}
+        }
+        restoreTriageDraft();
+
+        let currentTriageData = null;
+
+        // Envio do Wizard e Geração Completa do Protocolo
+        function submitWizard() {
             const name = document.getElementById('patient-name').value.trim();
             const age = document.getElementById('patient-age').value.trim();
             const phone = document.getElementById('patient-phone').value.trim();
             const city = document.getElementById('patient-city').value.trim();
-
-            if (!name || !age || !phone || !city) {
-                alert('Por favor, preencha todos os campos obrigatórios (*).');
-                return;
-            }
-            nextWizardStep(3);
-        }
-
-        function submitWizard() {
-            const name = document.getElementById('patient-name').value.trim();
+            const reason = document.getElementById('patient-reason').value.trim();
             const modalidade = document.querySelector('input[name="modalidade"]:checked').value;
             const shift = document.querySelector('input[name="shift"]:checked').value;
             const protocol = '#SEP-2026-' + Math.floor(1000 + Math.random() * 9000);
 
+            currentTriageData = { protocol, name, age, phone, city, reason, modalidade, shift };
+
+            // Atualiza campos da interface do resumo
             document.getElementById('summary-protocol').innerText = protocol;
             document.getElementById('summary-name').innerText = name;
+            document.getElementById('summary-age').innerText = `${age} anos`;
+            document.getElementById('summary-phone').innerText = phone;
+            document.getElementById('summary-city').innerText = city;
             document.getElementById('summary-modalidade').innerText = modalidade;
             document.getElementById('summary-shift').innerText = shift;
 
-            const text = encodeURIComponent(
-                `Olá! Solicitei triagem no Serviço-Escola de Psicologia da FAOP.\n\n` +
-                `*Protocolo:* ${protocol}\n` +
-                `*Nome:* ${name}\n` +
-                `*Modalidade:* ${modalidade}\n` +
-                `*Turno de Preferência:* ${shift}\n\n` +
-                `_(Compreendo que o SEP é um serviço-escola e não atende situações de emergência imediata)_`
-            );
-            document.getElementById('whatsapp-link').href = `https://wa.me/5584921826698?text=${text}`;
+            const reasonContainer = document.getElementById('summary-reason-container');
+            const reasonText = document.getElementById('summary-reason');
+            if (reason) {
+                reasonContainer.classList.remove('hidden');
+                reasonText.innerText = `"${reason}"`;
+            } else {
+                reasonContainer.classList.add('hidden');
+            }
+
+            // Monta mensagem detalhada oficial para o WhatsApp institucional
+            let message = `Olá! Solicitei triagem no Serviço-Escola de Psicologia da FAOP.\n\n` +
+                `📋 *Protocolo:* ${protocol}\n` +
+                `👤 *Nome:* ${name}\n` +
+                `🎂 *Idade:* ${age} anos\n` +
+                `📱 *Contato:* ${phone}\n` +
+                `📍 *Localidade:* ${city}\n` +
+                `🎯 *Modalidade:* ${modalidade}\n` +
+                `⏰ *Turno de Preferência:* ${shift}\n`;
+
+            if (reason) {
+                message += `📝 *Resumo da Demanda:* ${reason}\n`;
+            }
+
+            message += `\n_(Compreendo que o SEP é um serviço-escola universitário e não atende situações de emergência médica/psiquiátrica imediata)_`;
+
+            document.getElementById('whatsapp-link').href = `https://wa.me/5584921826698?text=${encodeURIComponent(message)}`;
+
+            // Salva registro definitivo no localStorage
+            try {
+                localStorage.setItem('sep_last_triage', JSON.stringify({ ...currentTriageData, date: new Date().toISOString() }));
+                localStorage.removeItem('sep_triage_draft');
+            } catch (e) {}
 
             nextWizardStep(4);
         }
 
-        // Drawer Mobile
+        // Função para Copiar Dados do Protocolo
+        function copyProtocolSummary() {
+            if (!currentTriageData) return;
+            const d = currentTriageData;
+            let text = `COMPROVANTE DE PRÉ-CADASTRO DE TRIAGEM - SEP · FAOP\n` +
+                `Protocolo: ${d.protocol}\n` +
+                `Nome: ${d.name}\n` +
+                `Idade: ${d.age} anos\n` +
+                `Contato: ${d.phone}\n` +
+                `Localidade: ${d.city}\n` +
+                `Modalidade: ${d.modalidade}\n` +
+                `Turno: ${d.shift}\n`;
+            if (d.reason) text += `Demanda: ${d.reason}\n`;
+            text += `Responsável Técnico: Prof. Pedro Atuan (CRP 17/3882)`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Comprovante copiado com sucesso!');
+            }).catch(() => {
+                showToast('Erro ao copiar dados.');
+            });
+        }
+
+        // Resetar o Wizard para nova triagem
+        function resetWizard() {
+            document.getElementById('appointment-form').reset();
+            currentTriageData = null;
+            nextWizardStep(1);
+        }
+
+        // Notificação Toast
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            if (!toast) return;
+            if (toastMsg) toastMsg.innerText = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // Drawer Mobile & Acessibilidade
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         if (menuBtn && mobileMenu) {
             menuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
                 mobileMenu.classList.toggle('hidden');
+                menuBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+            });
+
+            // Fecha o menu móvel ao clicar em qualquer link de navegação
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                });
             });
         }
 

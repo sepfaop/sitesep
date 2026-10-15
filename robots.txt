@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sepfaop.github.io/sitesep/sitemap.xml
